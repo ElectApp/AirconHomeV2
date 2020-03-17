@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tab_home"
+        android:layout_weight="0.3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.HomeTabText"
+        android:background="@color/colorTrans"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/main" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#bfbfbf"/>
+
+    <TextView
+        android:id="@+id/tab_logging"
+        android:layout_weight="0.3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.HomeTabText"
+        android:background="#b4b4b4"
+        android:textColor="#ffffff"
+        android:text="@string/logging" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#bfbfbf"/>
+
+    <TextView
+        android:id="@+id/tab_member"
+        android:layout_weight="0.3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.HomeTabText"
+        android:background="#b4b4b4"
+        android:textColor="#ffffff"
+        android:text="@string/member" />
+
+</LinearLayout>

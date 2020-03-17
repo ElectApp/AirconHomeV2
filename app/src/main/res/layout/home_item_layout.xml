@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/home_item_margin_top"
+    android:layout_marginStart="@dimen/g_p_side"
+    android:layout_marginEnd="@dimen/g_p_side"
+    android:layout_marginBottom="@dimen/home_item_margin_top"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/g_conner"
+    app:cardPreventCornerOverlap="false"
+    app:cardElevation="@dimen/g_eva">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_item_h">
+
+        <com.apyeng.airconhomev2.SelectableRoundedImageView
+            android:id="@+id/home_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:foreground="@drawable/home_item_fg"
+            android:scaleType="centerCrop"
+            app:sriv_left_top_corner_radius="@dimen/g_conner"
+            app:sriv_left_bottom_corner_radius="@dimen/g_conner"
+            app:sriv_right_top_corner_radius="@dimen/g_conner"
+            app:sriv_right_bottom_corner_radius="@dimen/g_conner"/>
+
+        <ImageView
+            android:id="@+id/setting_icon"
+            android:layout_width="@dimen/g_ic_s"
+            android:layout_height="@dimen/g_ic_s"
+            android:layout_gravity="top|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/g_ic_p"
+            android:src="@drawable/ic_more_horiz" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/home_item_p">
+
+            <TextView
+                android:id="@+id/home_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="36dp"
+                android:fontFamily="@font/muli_extra_bold"
+                android:text="@string/home_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/home_item_t"
+                app:layout_constraintBottom_toTopOf="@+id/num_devices"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/num_devices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/installed"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/home_item_dt"
+                app:layout_constraintBottom_toTopOf="@+id/power_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/power_consumption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/consumption"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/home_item_dt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/power_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/saving"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/home_item_dt"
+                app:layout_constraintBottom_toTopOf="@+id/power_consumption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/loading_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:duration="800">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/home_item_loading_bg"
+                android:padding="@dimen/home_item_p">
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="36dp"
+                    android:background="@color/colorGray1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:background="@color/colorGray1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorGray1"
+                    app:layout_constraintBottom_toTopOf="@+id/line2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorGray1"
+                    app:layout_constraintBottom_toTopOf="@+id/line3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

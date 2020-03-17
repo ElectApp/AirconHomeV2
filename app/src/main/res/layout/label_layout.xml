@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.apyeng.airconhomev2.ImageTextButtonWidget
+        android:id="@+id/labels_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/g_eva"
+        app:img_btn_textSize="@dimen/g_text"
+        app:img_btn_text="@string/labels"
+        app:img_btn_icon="@drawable/label_icon"
+        app:img_btn_backgroundColor="@color/colorPrimary"
+        app:img_btn_textAllCap="false"
+        app:img_btn_elevation="@dimen/g_eva"
+        app:img_btn_iconSize="@dimen/label_icon_s"
+        app:img_btn_conner="@dimen/label_conner"
+        app:img_btn_textStyle="normal"/>
+
+</FrameLayout>

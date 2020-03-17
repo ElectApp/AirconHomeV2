@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.apyeng.airconhomev2.ImageTextButtonWidget
+                android:visibility="gone"
+                android:id="@+id/add_label_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/g_margin_top"
+                android:layout_marginStart="@dimen/g_margin_top"
+                android:layout_marginBottom="@dimen/item_offset"
+                app:img_btn_textColor="@color/colorAccent"
+                app:img_btn_textSize="@dimen/g_text"
+                app:img_btn_text="@string/build_labels"
+                app:img_btn_icon="@drawable/add_label_icon"
+                app:img_btn_iconColor="@color/colorAccent"
+                app:img_btn_backgroundColor="@color/colorWhite"
+                app:img_btn_textAllCap="false"
+                app:img_btn_elevation="@dimen/g_eva"
+                app:img_btn_iconSize="@dimen/label_icon_s"
+                app:img_btn_conner="@dimen/label_conner"
+                app:img_btn_textStyle="normal"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/label_rv"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/g_p_side"
+                android:paddingEnd="@dimen/g_p_side" />
+
+            <TextView
+                android:id="@+id/total_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/g_margin_top"
+                android:textSize="@dimen/g_text"
+                android:text="@string/air_conditioner"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ac_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/g_p_side"
+                android:paddingEnd="@dimen/g_p_side" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/no_ac_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/g_margin_top"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/g_text_big"
+            android:text="@string/no_ac"
+            android:fontFamily="@font/muli_extra_bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/g_text_3"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:text="@string/no_ac_detail"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/circle_progress"
+        android:layout_width="@dimen/circle_progress"
+        android:layout_height="@dimen/circle_progress"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/no_internet_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorFault"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/g_p_side"
+        android:singleLine="true"
+        android:text="@string/no_internet"
+        android:textAllCaps="true"
+        android:textColor="@color/colorWhite" />
+
+
+</FrameLayout>

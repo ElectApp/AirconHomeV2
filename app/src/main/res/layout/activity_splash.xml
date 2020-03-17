@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:theme="@style/AppTheme.Splash"
+    tools:context=".SplashActivity">
+
+    <LinearLayout
+        android:id="@+id/root_lay"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side"
+        android:paddingEnd="@dimen/g_p_side"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="@dimen/app_ic"
+            android:layout_height="@dimen/app_ic"
+            android:layout_marginTop="56dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/app_icon_white"
+            android:contentDescription="@string/app_name"/>
+
+        <LinearLayout
+            android:id="@+id/buttonPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <com.apyeng.airconhomev2.RoundButtonWidget
+                    android:id="@+id/sign_in_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonColor="@color/colorWhite"
+                    app:text="@string/sign_in"
+                    app:textColor="@color/colorAccent" />
+
+                <View
+                    android:id="@+id/triangle_left"
+                    android:layout_width="@dimen/g_ic_s"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/g_p_side"
+                    android:background="@drawable/triangle_shape" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <com.apyeng.airconhomev2.RoundButtonWidget
+                    android:id="@+id/sign_up_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonColor="@color/colorTrans"
+                    app:text="@string/sign_up" />
+
+                <View
+                    android:id="@+id/triangle_right"
+                    android:layout_width="@dimen/g_ic_s"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/g_p_side"
+                    android:background="@drawable/triangle_shape" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/enter_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_conner_2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/username_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/g_p_side">
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_extra_bold"
+                    android:text="@string/username" />
+
+                <TextView
+                    android:id="@+id/counter"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <com.apyeng.airconhomev2.ClearableEditText
+                android:id="@+id/enter_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:background="@drawable/enter_background_1"
+                android:hint="@string/enter_username" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_extra_bold"
+                android:paddingTop="@dimen/g_p_side"
+                android:text="@string/email" />
+
+            <com.apyeng.airconhomev2.ClearableEditText
+                android:id="@+id/enter_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:background="@drawable/enter_background_1"
+                android:hint="@string/enter_email" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_extra_bold"
+                android:paddingTop="@dimen/g_p_side"
+                android:text="@string/password" />
+
+            <com.apyeng.airconhomev2.PasswordEditText
+                android:id="@+id/enter_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:background="@drawable/enter_background_1"
+                android:hint="@string/enter_password" />
+
+            <TextView
+                android:id="@+id/forget_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/g_p_side"
+                android:gravity="end"
+                android:text="@string/forget_password"
+                android:textColor="@color/colorBlue"
+                android:fontFamily="@font/muli_extra_bold"/>
+
+            <com.apyeng.airconhomev2.RoundButtonWidget
+                android:id="@+id/sign_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/g_margin_top"
+                android:layout_marginBottom="@dimen/g_p_side"
+                app:text="@string/sign_in"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+

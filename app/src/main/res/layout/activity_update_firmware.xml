@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateFirmwareActivity">
+
+    <include layout="@layout/general_app_bar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"/>
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/lay_checking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side_2"
+        android:paddingEnd="@dimen/g_p_side_2"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <ProgressBar
+            android:layout_width="@dimen/circle_progress"
+            android:layout_height="@dimen/circle_progress" />
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:text="@string/checking_updates"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lay_available"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side_2"
+        android:paddingEnd="@dimen/g_p_side_2"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/circle_progress"
+            android:layout_height="@dimen/circle_progress"
+            android:src="@drawable/confetti_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:text="@string/update_available"/>
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:textColor="@color/colorTextNote" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/tv_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextNote"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lay_updated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side_2"
+        android:paddingEnd="@dimen/g_p_side_2"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/circle_progress"
+            android:layout_height="@dimen/circle_progress"
+            android:src="@drawable/happy_icon"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:text="@string/firmware_updated"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lay_updating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side_2"
+        android:paddingEnd="@dimen/g_p_side_2"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="@dimen/circle_progress"
+            android:layout_height="@dimen/circle_progress" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:text="@string/updating_firmware"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:text="@string/update_note"
+            android:textAllCaps="true"
+            android:textColor="@color/colorRed"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lay_failed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side_2"
+        android:paddingEnd="@dimen/g_p_side_2"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/circle_progress"
+            android:layout_height="@dimen/circle_progress"
+            android:src="@drawable/sad_icon"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center"
+            android:text="@string/update_failed"/>
+
+    </LinearLayout>
+
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/action_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/g_p_side_2"
+        android:layout_gravity="bottom"
+        app:text="@string/update"
+        app:textSize="@dimen/g_text"/>
+
+
+</FrameLayout>

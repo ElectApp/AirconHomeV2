@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:theme="@style/LoadingDialogStyle">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/app_ic"
+            android:layout_height="@dimen/app_ic"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/app_icon_white" />
+
+        <ImageView
+            android:id="@+id/load_icon"
+            android:layout_width="108dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

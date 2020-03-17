@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundButtonWidget">
+        <attr name="text" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textFont" format="reference"/>
+        <attr name="textAllCap" format="boolean"/>
+        <attr name="buttonColor" format="color"/>
+        <attr name="conner" format="dimension"/>
+        <attr name="elevation" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ImageTextButtonWidget">
+        <attr name="img_btn_text" format="string"/>
+        <attr name="img_btn_textSize" format="dimension"/>
+        <attr name="img_btn_textColor" format="color"/>
+        <attr name="img_btn_textAllCap" format="boolean"/>
+        <attr name="img_btn_textStyle" format="enum">
+            <enum name="bold" value="0"/>
+            <enum name="normal" value="1"/>
+        </attr>
+        <attr name="img_btn_icon" format="reference"/>
+        <attr name="img_btn_iconColor" format="color"/>
+        <attr name="img_btn_iconSize" format="dimension"/>
+        <attr name="img_btn_iconPadding" format="dimension"/>
+        <attr name="img_btn_backgroundColor" format="color"/>
+        <attr name="img_btn_conner" format="dimension"/>
+        <attr name="img_btn_elevation" format="dimension"/>
+        <attr name="img_btn_hide" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="icon" value="1"/>
+            <enum name="text" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TextDegreeWidget">
+        <attr name="txt_deg_number" format="string"/>
+        <attr name="txt_deg_numberSize" format="dimension"/>
+        <attr name="txt_deg_unit" format="string"/>
+        <attr name="txt_deg_unitSize" format="dimension"/>
+        <attr name="txt_deg_textColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SelectableRoundedImageView">
+        <attr name="sriv_left_top_corner_radius" format="dimension" />
+        <attr name="sriv_right_top_corner_radius" format="dimension" />
+        <attr name="sriv_left_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_right_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_border_width" format="dimension" />
+        <attr name="sriv_border_color" format="color" />
+        <attr name="sriv_oval" format="boolean" />
+        <attr name="android:scaleType" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="8dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/i_rssi"
+        android:layout_width="@dimen/g_ic_s"
+        android:layout_height="@dimen/g_ic_s"
+        android:src="@drawable/wifi_level3_icon"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_ssid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:text="SSID"/>
+
+        <TextView
+            android:id="@+id/tv_bssid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGray3"
+            android:textSize="16sp"
+            android:text="BSSID"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_rssi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGray3"
+        android:layout_gravity="center"
+        android:text="-50 dBm"/>
+
+</LinearLayout>

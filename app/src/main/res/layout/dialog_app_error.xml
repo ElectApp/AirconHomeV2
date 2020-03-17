@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:padding="@dimen/g_p_side_2"
+    android:theme="@style/FullScreenDialogStyle">
+
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="@dimen/app_ic"
+        android:layout_height="@dimen/app_ic"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/g_margin_top3"
+        android:src="@drawable/app_icon_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/action_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_icon">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_extra_bold"
+            android:gravity="center_horizontal"
+            android:text="@string/no_internet"
+            android:textSize="@dimen/g_text_big" />
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_p_side"
+            android:gravity="center_horizontal"
+            android:text="@string/no_internet_detail"
+            android:textSize="@dimen/g_text_3" />
+
+    </LinearLayout>
+
+
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/action_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/g_btn_bottom_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:text="@string/retry"
+        app:textSize="@dimen/g_text_3"/>
+
+
+</android.support.constraint.ConstraintLayout>

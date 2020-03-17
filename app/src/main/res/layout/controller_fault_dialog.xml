@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/GeneralDialog"
+    android:background="@drawable/dialog_background">
+
+    <ImageView
+        android:id="@+id/close_icon"
+        android:layout_width="@dimen/g_ic_s"
+        android:layout_height="@dimen/g_ic_s"
+        android:padding="@dimen/g_ic_p"
+        android:src="@drawable/ic_close"
+        android:layout_gravity="end"/>
+
+    <ImageView
+        android:id="@+id/fault_icon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/ic_warning"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/fault_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_extra_bold"
+        android:gravity="center_horizontal"
+        android:text="Fault code" />
+
+    <TextView
+        android:id="@+id/fault_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/g_text_3"
+        android:padding="24dp"
+        android:text="detail" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
+
+</LinearLayout>

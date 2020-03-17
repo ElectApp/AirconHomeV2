@@ -1,0 +1,222 @@
+<resources>
+    <string name="app_name">Aircon Home</string>
+
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
+    <string name="forget_password">Forget password?</string>
+
+    <string name="email">Email</string>
+    <string name="enter_email">Enter email here</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter password here</string>
+    <string name="username">Username</string>
+    <string name="enter_username">Enter username here</string>
+
+    <string name="verify_email">We have already sent the account verification link to the email.</string>
+    <string name="ok">@android:string/ok</string>
+    <string name="resend">Resend</string>
+
+    <string name="reset_note">Please enter the account to reset the password.</string>
+    <string name="reset_email">We have already sent the account password reset link to the email.</string>
+    <string name="reset_password">Reset Password</string>
+
+    <!-- HomeListActivity -->
+    <string name="welcome_title">Hello,</string>
+    <string name="welcome_detail">You can control the air conditioner in your home by one app. Click button below for let\'s start.</string>
+    <string name="join">Join</string>
+    <string name="build">Build</string>
+
+    <!-- Bottom Menu on HomeListActivity -->
+    <string name="edit_profile">Edit Profile</string>
+    <string name="leave_home">Leave the Home</string>
+    <string name="left">Left</string>
+    <string name="confirm_leave">Are you sure you want to leave as a member?</string>
+    <string name="confirm">Confirm</string>
+
+    <!-- AddDeviceActivity -->
+    <string name="build_home">Build Home</string>
+    <string name="home_name">Home Name</string>
+    <string name="enter_home_name">Enter your home name</string>
+    <string name="save">Save</string>
+    <string name="save_home_note">*You can edit it later.</string>
+    <string name="add_ac_to">Add A/C to</string>
+    <string name="home">home</string>
+    <string name="step_1">Step 1</string>
+    <string name="connect_ac_wifi">Connect Wi-Fi from the air conditioner (A/C) in format AC-XXXX such as AC-486E</string>
+    <string name="connect_wifi">Connect A/C</string>
+    <string name="connect_wifi_note">*Press the \"back\" button after connecting successfully</string>
+    <string name="step_2">Step 2</string>
+    <string name="set_ac_name">Set the nickname of your A/C</string>
+    <string name="enter_ac_name">Enter nickname</string>
+    <string name="next">Next</string>
+    <string name="step_3">Step 3</string>
+    <string name="connect_router">Connect the air conditioner to the internet via a Wi-Fi router</string>
+    <string name="wifi_name">Wi-Fi Name (SSID)</string>
+    <string name="type_select">Type or select</string>
+    <string name="wifi_password">Wi-Fi Password</string>
+    <string name="enter_wifi_password">Enter Wi-Fi password</string>
+    <string name="save_connect">Save and Connect</string>
+    <string name="save_connect_note">*After saving success, your A/C will automatically connect to the router.</string>
+    <string name="check_ac_connect_router">If the A/C can\'t connect to the Wi-Fi router, your phone will be able to detect the Wi-Fi from the A/C.</string>
+    <string name="add_new_ac">Add a new A/C</string>
+    <string name="done">Done</string>
+
+    <!-- Dialog -->
+    <string name="no_internet">No Internet connection</string>
+    <string name="no_internet_detail">Check your mobile data or Wi-Fi</string>
+    <string name="no_result">Something went wrong</string>
+    <string name="no_result_detail">Please check internet connection and retry</string>
+    <string name="retry">Retry</string>
+    <string name="no_ac_connected">No Air Conditioner (A/C) connection</string>
+    <string name="upload_failed_title">Upload Image failed</string>
+
+    <!-- Join Activity -->
+    <string name="join_member">Join Membership</string>
+    <string name="scan_title">Scan the QR code of Home</string>
+    <string name="photo_gallery">Photo Gallery</string>
+    <string name="error">Error</string>
+    <string name="read_failed">Cannot read this QR code</string>
+    <string name="qr_code_details">QR code details</string>
+    <string name="already_member">You are already a member.</string>
+    <string name="not_found_home">Not found home!</string>
+
+    <string name="add">Add</string>
+
+    <!-- Other -->
+    <string name="close_app">Press again to close the app.</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed, please retry.</string>
+    <string name="no_router">Not found Wi-Fi router</string>
+
+
+    <!-- Bottom Nav -->
+    <string name="main">Main</string>
+    <string name="logging">Logging</string>
+    <string name="member">Member</string>
+    <string name="other">Other</string>
+
+    <!-- Menu in toolbar at HomeActivity -->
+    <string name="add_ac">Add A/C</string>
+    <string name="add_member">Add Member</string>
+
+    <!-- Main fragment -->
+    <string name="labels">Labels</string>
+    <string name="build_labels">Build labels</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="no_ac">No Air Conditioner found</string>
+    <string name="no_ac_detail">Press the plus icon to add the first air conditioner to your home.</string>
+    <string name="air_conditioner">Air Conditioner</string>
+
+    <!-- People Fragment -->
+    <string name="no_member">No Member found</string>
+    <string name="no_member_detail">Let the other party use the QR code reader to become your home member.</string>
+    <string name="denied_write">Cannot save a QR code. Please grant write external storage permission and retry.</string>
+    <string name="saved">Saved</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+
+    <!-- Home Item -->
+    <string name="installed">Installed</string>
+    <string name="consumption">Compressor</string>
+    <string name="saving">Saving</string>
+    <string name="devices">devices</string>
+
+    <!-- ControlActivity -->
+    <string name="room">Room</string>
+    <string name="time_on_off">Time ON - OFF</string>
+    <string name="mode">Mode</string>
+    <string name="fan">Fan</string>
+    <string name="quiet">Quiet</string>
+    <string name="louver">Louver</string>
+    <string name="sleep">Sleep</string>
+    <string name="timer">Timer</string>
+    <string name="eco">Eco</string>
+    <string name="turbo">Turbo</string>
+    <string name="alert_power_off">Please Power ON the Air Conditioner.</string>
+    <string name="no_chart">No chart data available</string>
+    <string name="disable_timer">Disable Timer</string>
+    <string name="disable_timer_confirm">Do you want to disable the timer?</string>
+
+    <!-- EditProfileActivity -->
+    <string name="registered">Registered</string>
+    <string name="built">Built</string>
+    <string name="sign_out_confirm">Are you sure you want to sign out?</string>
+    <string name="sign_out_failed">Sign out failed!</string>
+    <string name="sign_out_success">Signed out successfully</string>
+
+    <!-- LoggingFragment -->
+    <string-array name="log_tab_title">
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+    <string name="real_time">Real Time</string>
+    <string name="history">Saving Energy History</string>
+    <string name="saving_energy_in">Saving Energy in</string>
+    <string name="total">Total</string>
+    <string name="lifetime">Lifetime</string>
+    <string name="this_month">This month</string>
+    <string name="this_year">This year</string>
+
+    <string-array name="short_month">
+        <item>Jan.</item>
+        <item>Feb.</item>
+        <item>Mar.</item>
+        <item>Apr.</item>
+        <item>May</item>
+        <item>Jun.</item>
+        <item>Jul.</item>
+        <item>Aug.</item>
+        <item>Sep.</item>
+        <item>Oct.</item>
+        <item>Nov.</item>
+        <item>Dec.</item>
+    </string-array>
+
+    <!-- set timer -->
+    <string name="set_timer_on">Set Timer ON</string>
+    <string name="set_timer_off">Set Timer OFF</string>
+    <string name="power_on_in">Power ON in</string>
+    <string name="power_off_in">Power OFF in</string>
+    <string name="no_set_time">Can\'t set time to zero</string>
+
+
+    <!-- AboutActivity -->
+    <string name="about">About</string>
+    <!-- Title -->
+    <string-array name="about_title_items">
+        <item>Update Firmware</item>
+        <item>Device ID</item>
+        <item>Device Name</item>
+        <item>Version</item>
+        <item>MD5</item>
+        <item>Network Name</item>
+        <item>IP Address</item>
+        <item>MAC Address</item>
+        <item>Developer</item>
+    </string-array>
+
+    <!-- UpdateFirmwareActivity -->
+    <string name="update_title">Update Firmware</string>
+    <string name="firmware_updated">The firmware is up to date.</string>
+    <string name="checking_updates">Checking for updates\u2026</string> <!-- \u2026 = ... -->
+    <string name="update_available">New updates are available.</string>
+    <string name="update">Update</string>
+    <string name="updating_firmware">Updating firmware\u2026</string>
+    <string name="update_note">Do not power off the air conditioner!</string>
+    <string name="update_failed">Update failed!, please retry later.</string>
+
+    <!-- ModuleScanWiFiDialog -->
+    <string name="select_wifi">Select Wi-Fi network</string>
+    <string name="refresh">Refresh</string>
+    <string name="no_wifi">Wi-Fi not found!</string>
+    <string name="scanning_wifi">Scanning Wi-Fi\u2026</string>
+    <string name="custom">Custom</string>
+    <string name="enter_wifi_ssid">Enter Wi-Fi name (SSID)</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

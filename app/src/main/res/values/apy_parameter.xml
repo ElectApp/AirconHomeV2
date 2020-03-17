@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <!-- Thank:
+        https://stackoverflow.com/questions/42646003/android-studio-showing-errorsmissing-translation-after-updating
+    -->
+
+    <string name="indoor_fault" translatable="false">Indoor Controller Fault</string>
+    <string name="outdoor_fault" translatable="false">Outdoor Controller Fault</string>
+
+    <!-- Modbus value = Index of array + 1 -->
+    <string-array name="outdoor_fault_description">
+        <item>	Heat sink over heat (driver)	</item>
+        <item>	Over current at acceleration state (hardware trip)	</item>
+        <item>	Over current at steady state (hardware trip	</item>
+        <item>	Over current at deceleration state (hardware trip)	</item>
+        <item>	DC bus under voltage	</item>
+        <item>	DC bus over voltage	</item>
+        <item>	Port output enable (POE) protection	</item>
+        <item>	Inbox over temperature (driver)	</item>
+        <item>	PFC converter over current	</item>
+        <item>	Over current at acceleration state (software trip)	</item>
+        <item>	Over current at acceleration state (software trip)	</item>
+        <item>	Over current at steady state (software trip)	</item>
+        <item>	Over current at deceleration state (software trip)	</item>
+        <item>	PFC module over heat	</item>
+        <item>	Communication loss time out between driver and outdoor controller 	</item>
+        <item>	Heat sink temperature sensor error	</item>
+        <item>	Reserve	</item>
+        <item>	Input phase loss protection (3-phase driver model)	</item>
+        <item>	Inbox temperature sensor error	</item>
+        <item>	Abnormal condition (ex: decel speed until stop)	</item>
+        <item>	PFC converter fault (ex: CL, OU, LU, PL)	</item>
+        <item>	EEPROM not initialize (BLDC driver)	</item>
+        <item>	POE protection is not activated	</item>
+        <item>	Output phase loss protection	</item>
+        <item>	Compressor demagnetizing protection	</item>
+        <item>	Discharge over temperature	</item>
+        <item>	Condenser over temperature	</item>
+        <item>	BLDC fan 1 error	</item>
+        <item>	BLDC fan 2 error	</item>
+        <item>	Reserve	</item>
+        <item>	Reserve	</item>
+        <item>	Suction temperature sensor error 	</item>
+        <item>	Evaporator inlet temperature sensor error	</item>
+        <item>	Evaporator outlet temperature sensor error	</item>
+        <item>	Evaporator outlet temperature sensor error	</item>
+        <item>	High pressure protection	</item>
+        <item>	Low pressure protection	</item>
+        <item>	TEMP temperature sensor error	</item>
+        <item>	Input phase loss, Over/Under frequency	</item>
+        <item>	Communication loss time out between indoor and outdoor controller 	</item>
+        <item>	External overload 1 (I/P AUX 1)	</item>
+        <item>	External overload 2	</item>
+        <item>	Ambient temperature sensor error 	</item>
+        <item>	EEPROM not initialize (outdoor controller)	</item>
+        <item>	Compressor (Discharge) temperature sensor error 	</item>
+        <item>	Condenser temperature sensor error	</item>
+    </string-array>
+
+    <!-- Modbus value = Index of array + 101 -->
+    <string-array name="indoor_fault_description">
+        <item>	Inlet temperature sensor error	</item>
+        <item>	Outlet temperature sensor error	</item>
+        <item>	Room temperature sensor error	</item>
+        <item>	Modbus error (between indoor and outdoor controller)	</item>
+        <item>	Cooling fail protection	</item>
+        <item>	Anti Freeze protection	</item>
+        <item>	Gas short protection	</item>
+        <item>	Overcharge protection	</item>
+        <item>	Motor pole error	</item>
+        <item>	Indoor BLDC Fan error	</item>
+    </string-array>
+
+
+</resources>

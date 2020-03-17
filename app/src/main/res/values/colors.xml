@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#2F80ED</color>
+    <color name="colorPrimaryDark">#2F80ED</color>
+    <color name="colorAccent">#f54819</color>
+
+    <color name="colorTextNormal">#000000</color>
+    <color name="colorTextNote">#747474</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGray0">#ece9e6</color>
+    <color name="colorGray1">#cfcfcf</color>
+    <color name="colorGray2">#e2e2e2</color>
+    <color name="colorGray3">#747474</color>
+    <color name="colorGray4">#bcbbbb</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGreen">#44cb44</color>
+    <color name="colorGreen2">#3cc497</color>
+    <color name="colorGreen3">#017327</color>
+    <color name="colorRed">#ff3333</color>
+    <color name="colorSky">#56CCF2</color>
+    <color name="colorSky2">#01a8f6</color>
+    <color name="colorBlue">#5b98ea</color>
+
+    <color name="colorTrans">@android:color/transparent</color>
+    <color name="colorWhiteTrans">#ceffffff</color>
+    <color name="colorBlackTrans">#28000000</color>
+
+    <color name="colorMainBackgroundTop">#ece9e6</color>
+
+    <array name="colorIconBottomNav">
+        <item>#2F80ED</item>
+        <item>#747474</item>
+    </array>
+
+    <color name="powerOn">#44cb44</color>
+    <color name="powerOff">#ff3333</color>
+
+    <color name="colorOffline">#b4b4b4</color>
+
+    <color name="colorSuperCool">#006dff</color>
+    <color name="colorCool">#3ef3ea</color>
+    <color name="colorNormal">#7df06d</color>
+    <color name="colorHot">#ff7300</color>
+    <color name="colorSuperHot">#ff0000</color>
+
+
+    <!-- Room temp Color for Air Item -->
+    <array name="roomTemp">
+        <item>#006dff</item>
+        <item>#3ef3ea</item>
+        <item>#7df06d</item>
+        <item>#ff7300</item>
+        <item>#ff0000</item>
+    </array>
+
+    <array name="colorRandom">
+        <item>#f48a8a</item>
+        <item>#f9794f</item>
+        <item>#d5be3f</item>
+        <item>#9bdd43</item>
+        <item>#44d770</item>
+        <item>#43c8b3</item>
+        <item>#378dbc</item>
+        <item>#9376e8</item>
+        <item>#f266ff</item>
+        <item>#ff6b72</item>
+    </array>
+
+
+
+    <array name="colorHomeTabText">
+        <item>#2F80ED</item>    <!-- Selected -->
+        <item>#ffffff</item>    <!-- Unselected -->
+    </array>
+
+    <array name="colorHomeTab">
+        <item>#00000000</item>  <!-- Selected -->
+        <item>#b4b4b4</item>    <!-- Unselected -->
+    </array>
+
+    <color name="colorFault">#ff1a00</color>
+
+    <color name="colorLine">#dedede</color>
+
+    <array name="chartColor">
+        <item>#017327</item>  <!-- PV -->
+        <item>#ff3333</item>  <!-- AC -->
+    </array>
+
+    <array name="chartAreaColor">
+        <item>#924ced82</item>  <!-- PV -->
+        <item>#a0ff7676</item>  <!-- AC -->
+    </array>
+
+    <array name="textTabColor">
+        <item>#2F80ED</item>  <!-- Select -->
+        <item>#747474</item>  <!-- Unselected -->
+    </array>
+
+
+
+
+</resources>

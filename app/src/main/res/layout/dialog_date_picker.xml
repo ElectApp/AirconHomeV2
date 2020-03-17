@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/g_conner"
+    app:cardPreventCornerOverlap="false"
+    android:theme="@style/GeneralDialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/close_icon"
+                android:layout_width="@dimen/g_ic_s"
+                android:layout_height="@dimen/g_ic_s"
+                android:background="?attr/selectableItemBackground"
+                android:layout_gravity="start|top"
+                android:padding="@dimen/g_ic_p"
+                android:src="@drawable/ic_close"/>
+
+            <ImageView
+                android:id="@+id/ok_icon"
+                android:layout_width="@dimen/g_ic_s"
+                android:layout_height="@dimen/g_ic_s"
+                android:background="?attr/selectableItemBackground"
+                android:layout_gravity="end|top"
+                android:padding="@dimen/g_ic_p"
+                android:src="@drawable/ic_check"/>
+
+        </FrameLayout>
+
+        <com.applikeysolutions.cosmocalendar.view.CalendarView
+            android:id="@+id/date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

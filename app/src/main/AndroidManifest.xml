@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.apyeng.airconhomev2">
+
+    <!-- Access location is necessary for any device -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- WiFi Scanner, TCP, Network connect, MQTT -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- Vibrate -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Pick image gallery -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- Take a photo and save gallery -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Take QR code or Capture -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--
+     android:usesCleartextTraffic="true" use for solving can't download image from HTTP
+         but HTTPS is no problem, must create PHP script for download (download-image.php)
+         can't direct download by url path to .jpg
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddDeviceActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" /> <!-- Move up button on Keyboard -->
+        <activity android:name=".HomeListActivity" />
+
+        <!-- Mqtt Service -->
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".ControlActivity"
+            android:theme="@style/AppTheme.ControlActivity" />
+        <activity android:name=".JoinActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".UpdateFirmwareActivity" />
+    </application>
+
+</manifest>

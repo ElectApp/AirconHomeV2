@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add_ac_action"
+        android:title="@string/add_ac"
+        android:icon="@drawable/ic_add_circle"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/add_member"
+        android:icon="@drawable/ic_add_member"
+        android:title="@string/add_member"
+        app:showAsAction="ifRoom"/>
+
+</menu>

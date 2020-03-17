@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".ModuleScanWiFiDialog">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/lay_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
+
+            <FrameLayout
+                android:id="@+id/lay_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_wifi"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/toolbar_title_s"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:padding="@dimen/g_p_side"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_gravity="start|center"
+                    android:padding="@dimen/g_p_side"
+                    android:text="@string/custom"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorGray2"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_custom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/i_back"
+                    android:layout_width="@dimen/g_ic_s"
+                    android:layout_height="@dimen/g_ic_s"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_back"/>
+
+                <com.apyeng.airconhomev2.ClearableEditText
+                    android:id="@+id/ssid_enter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/g_p_side"
+                    android:background="@drawable/enter_background_1"
+                    android:hint="@string/enter_wifi_ssid"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:maxLength="40"
+                    android:textSize="@dimen/text_btn" />
+
+                <TextView
+                    android:id="@+id/tv_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/add"
+                    android:gravity="center"
+                    android:fontFamily="@font/muli_extra_bold"
+                    android:textSize="@dimen/text_btn"
+                    android:padding="8dp"
+                    android:textColor="@color/colorWhite"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_network_items"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_no_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:text="@string/no_wifi"
+        android:textSize="16sp"
+        android:textColor="@color/colorGray3"
+        android:gravity="center"/>
+
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/rb_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/g_p_side"
+        app:text="@string/refresh"
+        app:textSize="@dimen/g_text" />
+
+</LinearLayout>

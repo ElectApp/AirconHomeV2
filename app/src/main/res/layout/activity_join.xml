@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JoinActivity">
+
+    <include layout="@layout/general_app_bar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"/>
+
+    <FrameLayout
+        android:id="@+id/scanner_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/found_item_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side"
+        android:paddingEnd="@dimen/g_p_side"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <com.apyeng.airconhomev2.SelectableRoundedImageView
+            android:id="@+id/home_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/home_img_icon"
+            app:sriv_oval="true"
+            app:sriv_border_width="2dp"
+            app:sriv_border_color="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/home_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/muli_extra_bold"
+            android:textSize="@dimen/g_text_big"
+            android:text="@string/home_name"/>
+
+        <TextView
+            android:id="@+id/error_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top2"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/g_text_big"
+            android:text="@string/already_member"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/action_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:background="@color/colorAccent"
+        android:focusable="true"
+        android:clickable="true"
+        android:fontFamily="@font/muli_extra_bold"
+        android:gravity="center"
+        android:padding="@dimen/g_p_side"
+        android:text="@string/photo_gallery"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_btn" />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/circle_progress"
+        android:layout_width="@dimen/circle_progress"
+        android:layout_height="@dimen/circle_progress"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

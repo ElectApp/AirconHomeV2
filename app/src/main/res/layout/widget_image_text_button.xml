@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorAccent"
+    app:cardCornerRadius="@dimen/g_conner_2"
+    app:cardElevation="@dimen/g_eva"
+    app:contentPaddingLeft="@dimen/g_ic_p"
+    app:contentPaddingRight="@dimen/g_conner_2">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="@dimen/g_ic_s"
+            android:layout_height="@dimen/g_ic_s"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/g_ic_p"
+            android:src="@drawable/app_icon_white"
+            android:contentDescription="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="@dimen/g_text"
+            android:text="@string/app_name"
+            android:textColor="@color/colorWhite"
+            android:theme="@style/AppTheme.TextBold"/>
+
+    </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

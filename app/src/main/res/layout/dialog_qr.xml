@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_background">
+
+    <ImageView
+        android:id="@+id/close_icon"
+        android:layout_width="@dimen/g_ic_s"
+        android:layout_height="@dimen/g_ic_s"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/g_ic_p"
+        android:layout_gravity="end|top"
+        android:focusable="true"
+        android:clickable="true"
+        android:src="@drawable/ic_close"/>
+
+
+    <ImageView
+        android:id="@+id/qr_img"
+        android:layout_width="@dimen/qr_code_s"
+        android:layout_height="@dimen/qr_code_s"
+        android:layout_margin="@dimen/g_margin_top"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side"
+        android:paddingEnd="@dimen/g_p_side"
+        android:gravity="center"
+        android:textSize="@dimen/g_text_3"
+        android:text="@string/no_member_detail"
+        android:fontFamily="@font/muli_extra_light"/>
+
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/g_margin_top2"
+        app:text="@string/save"/>
+
+</LinearLayout>

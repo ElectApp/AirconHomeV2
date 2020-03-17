@@ -1,0 +1,158 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:fontFamily">@font/muli_light</item>
+        <item name="android:textSize">@dimen/g_text</item>
+        <item name="android:textColor">@color/colorTextNormal</item>
+
+        <item name="cardViewStyle">@style/CardView.Light</item>
+
+        <!-- Background -->
+        <item name="android:windowBackground">@drawable/main_background</item>
+
+    </style>
+
+    <style name="AppTheme.Splash" parent="AppTheme">
+        <!-- Full screen with Status bar and navigation
+        Can't set to True due to scroll view not work when SoftKeyboard visible -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!-- Translucent Head status -->
+        <item name="colorPrimaryDark">@color/colorTrans</item>
+        <!-- Translucent bottom navigator bar -->
+        <item name="android:navigationBarColor">@color/colorTrans</item>
+        <!-- Background -->
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <!-- Set this to true if you want Full Screen without status bar -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="AppTheme.AddDevice" parent="AppTheme">
+        <item name="android:textSize">@dimen/g_text_3</item>
+    </style>
+
+    <style name="GeneralDialog" parent="Theme.AppCompat.Dialog">
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textSize">@dimen/g_text_big</item>
+
+        <item name="android:textColor">@color/colorTextNormal</item>
+        <item name="android:fontFamily">@font/muli_light</item>
+
+
+    </style>
+
+    <!-- Full Screen Dialog -->
+    <!-- Thank: https://medium.com/@haxzie/android-full-screen-dialogs-using-dialogfragment-usage-guide-8fd3cc2cabf8 -->
+    <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorBlackTrans</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Set this to true if you want Full Screen without status bar -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+
+        <!-- This is important! Don't forget to set window background -->
+        <item name="android:windowBackground">@drawable/main_background</item>
+
+        <item name="android:fontFamily">@font/muli_light</item>
+        <item name="android:textSize">@dimen/g_text</item>
+        <item name="android:textColor">@color/colorTextNormal</item>
+
+    </style>
+
+    <style name="LoadingDialogStyle" parent="FullScreenDialogStyle">
+        <!-- Full screen with Status bar and navigation-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="LoadingDialogAnimation">
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="UpDownAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:fontFamily">@font/muli_extra_bold</item>
+        <item name="android:textSize">@dimen/toolbar_title_s</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/muli_extra_bold</item>
+        <item name="android:textSize">@dimen/toolbar_title_s</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="AppTheme.Main" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="AppTheme.TextBold" parent="Theme.MaterialComponents.Light">
+        <item name="android:fontFamily">@font/muli_extra_bold</item>
+    </style>
+
+    <style name="AppTheme.TextNormal" parent="Theme.MaterialComponents.Light">
+        <item name="android:fontFamily">@font/muli_light</item>
+    </style>
+
+    <style name="AppTheme.HomeTabText" parent="AppTheme">
+        <item name="android:fontFamily">@font/muli_extra_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="AppTheme.ControlActivity" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_sheet_dialog</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="Base.Widget.Design.TabLayout">
+        <item name="android:fontFamily">@font/muli_light</item>
+        <item name="android:textSize">@dimen/g_text</item>
+        <item name="android:textColor">@color/colorTextNote</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <!-- Thank: https://www.zoftino.com/android-timepicker-example -->
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/g_text_big2</item>
+        <item name="android:textColorPrimary">@color/colorBlack</item>
+        <item name="android:textColorSecondary">@color/colorGray3</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:padding="@dimen/g_p_side_2"
+    android:theme="@style/FullScreenDialogStyle">
+
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="@dimen/app_ic"
+        android:layout_height="@dimen/app_ic"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/app_icon_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPanel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_icon">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/verify_email"
+            android:textSize="@dimen/g_text_2"/>
+
+        <TextView
+            android:id="@+id/email_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/g_text_2"
+            android:fontFamily="@font/muli_extra_bold"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/buttonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <com.apyeng.airconhomev2.RoundButtonWidget
+            android:id="@+id/resend_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonColor="@color/colorTrans"
+            app:textColor="@color/colorAccent"
+            app:text="@string/resend"/>
+
+        <com.apyeng.airconhomev2.RoundButtonWidget
+            android:id="@+id/ok_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/g_p_side"
+            android:layout_marginTop="@dimen/g_margin_top"
+            app:text="@string/ok"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

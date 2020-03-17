@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Full Screen Dialog -->
+    <!-- Thank: https://medium.com/@haxzie/android-full-screen-dialogs-using-dialogfragment-usage-guide-8fd3cc2cabf8 -->
+    <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+        <!-- Set this to true if you want Full Screen without status bar -->
+        <item name="android:windowFullscreen">false</item>
+
+        <item name="android:windowIsFloating">false</item>
+
+        <!-- Translucent Head status -->
+        <item name="colorPrimaryDark">@color/colorTrans</item>
+        <!-- Set text on status bar to black color (only API >= 23)-->
+        <!-- item name="android:windowLightStatusBar">true</item -->
+        <!-- Translucent bottom navigator bar -->
+        <!-- item name="android:navigationBarColor">@color/colorTrans</item -->
+
+        <!-- This is important! Don't forget to set window background -->
+        <item name="android:windowBackground">@drawable/main_background</item>
+
+        <!-- Text -->
+        <item name="android:textColor">@color/colorTextNormal</item>
+        <item name="android:textSize">@dimen/g_text</item>
+        <item name="android:fontFamily">@font/muli_light</item>
+
+    </style>
+
+
+
+
+</resources>

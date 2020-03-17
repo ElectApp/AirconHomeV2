@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddDeviceActivity">
+
+    <include layout="@layout/general_app_bar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <LinearLayout
+        android:id="@+id/progress_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/step1"
+            android:layout_weight="0.33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTrans"
+            android:padding="4dp"
+            android:gravity="center"
+            android:text="@string/step_1"
+            android:textSize="@dimen/g_note" />
+        <View
+            android:layout_weight="0.005"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray1"/>
+        <TextView
+            android:id="@+id/step2"
+            android:layout_weight="0.33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:gravity="center"
+            android:text="@string/step_2"
+            android:textSize="@dimen/g_note"/>
+        <View
+            android:layout_weight="0.005"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray1"/>
+        <TextView
+            android:id="@+id/step3"
+            android:layout_weight="0.33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:gravity="center"
+            android:text="@string/step_3"
+            android:textSize="@dimen/g_note"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress_lay"
+        android:layout_above="@id/bottom_panel"
+        android:layout_marginBottom="@dimen/g_margin_top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/set_home_name_lay"
+                layout="@layout/layout_set_home_name" />
+
+            <include
+                android:id="@+id/connect_ac_lay"
+                layout="@layout/layout_connect_ac_wifi" />
+
+            <include
+                android:id="@+id/set_ac_name_lay"
+                layout="@layout/layout_set_ac_name" />
+
+            <include
+                android:id="@+id/connect_router_lay"
+                layout="@layout/layout_connect_router" />
+
+            <include
+                android:id="@+id/finish_lay"
+                layout="@layout/layout_set_ac_finish"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottom_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/g_p_side_2"
+        android:paddingEnd="@dimen/g_p_side_2"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/g_margin_top">
+
+        <com.apyeng.airconhomev2.RoundButtonWidget
+            android:id="@+id/done_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/done"
+            app:textSize="@dimen/g_text"
+            app:buttonColor="@color/colorPrimary"/>
+
+        <com.apyeng.airconhomev2.RoundButtonWidget
+            android:id="@+id/action_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:layout_marginBottom="@dimen/g_eva"
+            app:text="@string/save"
+            app:textSize="@dimen/g_text"/>
+
+        <TextView
+            android:id="@+id/button_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/connect_wifi_note"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

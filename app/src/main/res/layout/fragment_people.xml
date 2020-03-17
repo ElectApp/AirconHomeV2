@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/member_content"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/total_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/g_p_side_2"
+                android:textSize="@dimen/g_text"
+                android:text="total"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/member_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/no_member_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/g_margin_top"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/g_text_big"
+            android:text="@string/no_member"
+            android:fontFamily="@font/muli_extra_bold"/>
+
+        <ImageView
+            android:id="@+id/qr_img"
+            android:layout_width="@dimen/qr_code_s"
+            android:layout_height="@dimen/qr_code_s"
+            android:layout_margin="@dimen/g_margin_top"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/g_text_3"
+            android:text="@string/no_member_detail"
+            android:fontFamily="@font/muli_extra_light"/>
+
+        <com.apyeng.airconhomev2.RoundButtonWidget
+            android:id="@+id/save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/g_margin_top2"
+            app:text="@string/save"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/circle_progress"
+        android:layout_width="@dimen/circle_progress"
+        android:layout_height="@dimen/circle_progress"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

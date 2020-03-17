@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/g_p_side_2">
+
+    <ImageView
+        android:layout_width="196dp"
+        android:layout_height="196dp"
+        android:src="@drawable/ac_connect_rounter_icon"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/connect_router"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/g_margin_top"
+        android:fontFamily="@font/muli_extra_bold"
+        android:text="@string/wifi_name"/>
+
+    <LinearLayout
+        android:id="@+id/select_router_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enter_background_1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_ssid"
+            android:layout_weight="0.9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTrans"
+            android:foreground="?attr/selectableItemBackground"
+            android:hint="@string/enter_wifi_ssid"/>
+
+        <ImageView
+            android:id="@+id/select_icon"
+            android:layout_weight="0.1"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/down_icon"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/g_margin_top"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="0.7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_extra_bold"
+            android:text="@string/wifi_password"/>
+
+        <TextView
+            android:id="@+id/password_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="@dimen/g_text" />
+
+    </LinearLayout>
+
+    <com.apyeng.airconhomev2.PasswordEditText
+        android:id="@+id/enter_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enter_background_1"
+        android:singleLine="true"
+        android:hint="@string/enter_wifi_password" />
+
+</LinearLayout>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/root_view"
+    android:layout_height="match_parent">
+
+    <com.apyeng.airconhomev2.LockableNestedScrollView
+        android:id="@+id/contain_sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/content_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/real_time_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/g_p_side"
+                    android:textSize="@dimen/g_text_2"
+                    android:text="@string/real_time"
+                    android:fontFamily="@font/muli_extra_bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLine"/>
+
+                <LinearLayout
+                    android:id="@+id/energy_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/saving_item"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/energy_bg_item2"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/item_title"
+                            app:autoSizeTextType="uniform"
+                            android:text="@string/saving"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/saving_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/item_value"
+                            android:maxLines="1"
+                            android:textColor="@color/colorGreen3"
+                            app:autoSizeTextType="uniform"
+                            android:text="0.00 W"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/consumption_item"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/energy_bg_item2"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/item_title"
+                            app:autoSizeTextType="uniform"
+                            android:text="@string/consumption"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/consumption_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/item_value"
+                            android:textColor="@color/colorRed"
+                            android:maxLines="1"
+                            app:autoSizeTextType="uniform"
+                            android:text="0.00 W"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/group_divider"
+                android:background="@color/colorMainBackgroundTop"/>
+
+            <LinearLayout
+                android:id="@+id/history_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/g_p_side"
+                    android:textSize="@dimen/g_text_2"
+                    android:text="@string/history"
+                    android:fontFamily="@font/muli_extra_bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLine"/>
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/bar_tab_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    app:elevation="0dp"> <!-- Not show shadow -->
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/filter_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        app:tabTextAppearance="@style/TabTextAppearance"
+                        app:tabSelectedTextColor="@color/colorPrimary"
+                        app:tabTextColor="@color/colorTextNote"
+                        app:tabIndicatorColor="@color/colorPrimary"
+                        app:tabMaxWidth="0dp"
+                        app:tabGravity="fill"
+                        app:tabMode="fixed" />
+
+                </android.support.design.widget.AppBarLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/child_divider"
+                    android:background="@color/colorLine"/>
+
+                <LinearLayout
+                    android:id="@+id/time_selected_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/g_p_side"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/time_selected_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/g_text_3"
+                        android:text="@string/this_month"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/g_ic_s2"
+                        android:layout_height="@dimen/g_ic_s2"
+                        android:padding="@dimen/g_ic_p"
+                        android:src="@drawable/calendar_icon"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/child_divider"
+                    android:background="@color/colorLine"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/chart_result_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/bar_chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/chart_h"
+                            android:layout_marginTop="@dimen/g_p_side"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/child_divider"
+                            android:background="@color/colorLine"/>
+
+                        <com.apyeng.airconhomev2.NonScrollExpandableListView
+                            android:id="@+id/expanded_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                            android:childDivider="@color/colorLine"
+                            android:dividerHeight="0.5dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/graph_failed_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/no_chart"
+                        android:textColor="@color/colorGray3"/>
+
+                    <ProgressBar
+                        android:id="@+id/chart_loading"
+                        android:layout_width="@dimen/chart_loading"
+                        android:layout_height="@dimen/chart_loading"
+                        android:layout_gravity="center"/>
+
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/group_divider"
+                android:background="@color/colorMainBackgroundTop"/>
+
+        </LinearLayout>
+
+    </com.apyeng.airconhomev2.LockableNestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/circle_progress"
+        android:layout_width="@dimen/circle_progress"
+        android:layout_height="@dimen/circle_progress"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/no_internet_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorFault"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/g_p_side"
+        android:singleLine="true"
+        android:text="@string/no_internet"
+        android:textAllCaps="true"
+        android:textColor="@color/colorWhite" />
+
+</FrameLayout>

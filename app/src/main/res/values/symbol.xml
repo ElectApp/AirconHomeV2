@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <!-- Thank: https://www.degreesymbol.net/ -->
+    <string name="celsius_degree" translatable="false">\u2103</string>
+    <string name="fahrenheit_degree" translatable="false">\u2109</string>
+    <string name="ring_above" translatable="false">\u02DA</string>
+    <string name="ring_below" translatable="false">\u0325</string>
+    
+</resources>

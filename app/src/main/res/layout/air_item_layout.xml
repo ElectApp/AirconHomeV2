@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="@dimen/g_eva"
+    app:cardCornerRadius="@dimen/air_conner">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/topPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/air_conner">
+
+            <ImageView
+                android:id="@+id/warning_icon"
+                android:layout_width="@dimen/air_icon_s"
+                android:layout_height="@dimen/air_icon_s"
+                android:padding="@dimen/air_icon_p"
+                android:src="@drawable/ic_error"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/mode_icon"
+                android:layout_width="@dimen/air_icon_s"
+                android:layout_height="@dimen/air_icon_s"
+                android:layout_marginStart="8dp"
+                android:padding="@dimen/air_icon_p"
+                android:src="@drawable/cool_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/set_point_lay"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/air_icon_s"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/speed_icon"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/mode_icon"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/set_point_value"
+                    android:layout_width="54dp"
+                    android:layout_height="match_parent"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:text="24.5"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:includeFontPadding="false"
+                    android:gravity="top"
+                    android:text="@string/celsius_degree"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/speed_icon"
+                android:layout_width="@dimen/air_icon_s"
+                android:layout_height="@dimen/air_icon_s"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/air_icon_p"
+                android:src="@drawable/fan_speed_2_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/power_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/air_conner"
+            android:background="@color/powerOn"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/air_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="@dimen/air_conner"
+                android:layout_marginTop="4dp"
+                android:text="@string/home_name"
+                android:textSize="12sp"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/room_temp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.apyeng.airconhomev2.ImageTextButtonWidget
+                android:id="@+id/room_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/air_conner"
+                app:img_btn_backgroundColor="@color/colorNormal"
+                app:img_btn_conner="4dp"
+                app:img_btn_elevation="0dp"
+                app:img_btn_icon="@drawable/home_icon"
+                app:img_btn_iconPadding="4dp"
+                app:img_btn_iconSize="18dp"
+                app:img_btn_text="25\u00B0"
+                app:img_btn_textSize="12sp"
+                app:img_btn_textStyle="normal"
+                app:img_btn_textColor="@color/colorWhite"
+                app:img_btn_iconColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

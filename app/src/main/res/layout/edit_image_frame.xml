@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/qr_code_s"
+    android:layout_height="@dimen/qr_code_s"
+    android:layout_gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.apyeng.airconhomev2.SelectableRoundedImageView
+        android:id="@+id/profile_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:sriv_oval="true"
+        app:sriv_border_width="2dp"
+        app:sriv_border_color="@color/colorWhite"
+        app:srcCompat="@drawable/home_img_icon"/>
+
+    <ImageView
+        android:id="@+id/camera_icon"
+        android:layout_width="@dimen/g_ic_s"
+        android:layout_height="@dimen/g_ic_s"
+        android:layout_marginEnd="@dimen/g_p_side"
+        android:layout_gravity="end|bottom"
+        android:background="@drawable/circle_shape_3"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:src="@drawable/ic_photo_camera"/>
+
+</FrameLayout>

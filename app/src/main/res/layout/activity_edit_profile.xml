@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity">
+
+    <include
+        layout="@layout/general_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/g_p_side_2"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <include layout="@layout/edit_image_frame"/>
+
+        <com.apyeng.airconhomev2.ClearableEditText
+            android:id="@+id/name_enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top2"
+            android:background="@drawable/enter_background_1"
+            android:singleLine="true"
+            android:textSize="@dimen/g_text_big"
+            android:hint="@string/enter_home_name"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/registered_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/g_p_side"
+            android:layout_marginTop="@dimen/g_margin_top2"
+            android:gravity="center"
+            android:textSize="@dimen/g_text"
+            android:textColor="@color/colorTextNote"
+            android:text="Register Time"/>
+
+    </LinearLayout>
+
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/sign_out_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/g_margin_top2"
+        android:layout_marginStart="@dimen/g_p_side_2"
+        android:layout_marginEnd="@dimen/g_p_side_2"
+        android:layout_gravity="bottom"
+        app:text="@string/sign_out"
+        app:textColor="@color/colorRed"
+        app:buttonColor="@color/colorTrans"/>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/circle_progress"
+        android:layout_width="@dimen/circle_progress"
+        android:layout_height="@dimen/circle_progress"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

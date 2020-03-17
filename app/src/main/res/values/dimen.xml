@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="app_ic">108dp</dimen>
+
+    <dimen name="g_eva">2dp</dimen>
+    <dimen name="g_conner">16dp</dimen>
+    <dimen name="g_conner_2">24dp</dimen>
+
+    <dimen name="g_ic_s">48dp</dimen>
+    <dimen name="g_ic_s2">36dp</dimen>
+    <dimen name="g_ic_p">8dp</dimen>
+
+    <dimen name="g_margin_top">12dp</dimen>
+    <dimen name="g_margin_top2">24dp</dimen>
+    <dimen name="g_margin_top3">48dp</dimen>
+    <dimen name="g_p_side">8dp</dimen>
+    <dimen name="g_p_side_2">16dp</dimen>
+
+    <dimen name="g_note">14sp</dimen>
+    <dimen name="g_text">16sp</dimen>
+    <dimen name="g_text_2">18sp</dimen>
+    <dimen name="g_text_3">20sp</dimen>
+    <dimen name="g_text_big">22sp</dimen>
+    <dimen name="g_text_big2">36sp</dimen>
+    <dimen name="g_text_big3">56sp</dimen>
+
+    <dimen name="g_btn_bottom_margin">48dp</dimen>
+
+    <dimen name="main_app_bar_height">250dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="label_conner">20dp</dimen>
+    <dimen name="label_icon_s">36dp</dimen>
+
+    <dimen name="air_conner">8dp</dimen>
+    <dimen name="air_icon_s">32dp</dimen>
+    <dimen name="air_icon_p">4dp</dimen>
+
+    <dimen name="toolbar_title_s">20sp</dimen>
+    <dimen name="toolbar_icon_p">16dp</dimen>
+    <dimen name="toolbar_margin_top">28dp</dimen>
+
+    <dimen name="home_item_h">250dp</dimen>
+    <dimen name="home_item_p">16dp</dimen>
+    <dimen name="home_item_t">22sp</dimen>
+    <dimen name="home_item_dt">16sp</dimen>
+    <dimen name="home_item_margin_top">4dp</dimen>
+
+    <dimen name="text_btn">20sp</dimen>
+    <dimen name="bar_eva">4dp</dimen>
+
+    <dimen name="marker_corner_radius">4dp</dimen>
+    <dimen name="marker_height">40dp</dimen>
+    <dimen name="marker_width">32dp</dimen>
+
+    <dimen name="item_offset">6dp</dimen>
+
+    <dimen name="circle_progress">72dp</dimen>
+    <dimen name="chart_loading">36dp</dimen>
+
+    <dimen name="item_title">20dp</dimen>
+    <dimen name="item_value">48dp</dimen>
+
+    <dimen name="qr_code_s">200dp</dimen>
+
+    <dimen name="chart_h">250dp</dimen>
+
+    <dimen name="group_divider">12dp</dimen>
+    <dimen name="child_divider">0.5dp</dimen>
+
+
+</resources>
