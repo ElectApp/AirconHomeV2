@@ -6,7 +6,7 @@ android {
         applicationId "com.apyeng.airconhomev2"
         minSdkVersion 21
         targetSdkVersion 28     //Set target SDK for support Android 9.0
-        versionCode 7           //Fix bug MonthAndYear Picker
+        versionCode 7           //Fix bug MonthAndYear Picker, add sharing QR code to another app
         versionName "3.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

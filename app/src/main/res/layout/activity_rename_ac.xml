@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RenameACActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/general_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <include
+        layout="@layout/layout_set_ac_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"/>
+
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/g_margin_top"
+        android:layout_marginEnd="@dimen/g_margin_top"
+        android:layout_marginBottom="@dimen/g_margin_top2"
+        android:layout_alignParentBottom="true"
+        app:text="@string/save" />
+
+</RelativeLayout>

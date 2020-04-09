@@ -727,6 +727,41 @@ public class HomeManager {
                 });
     }
 
+    public void insertUpdateAnyGroupTable(final int groupId, final String sqlMessage, final OnSingleStringCallback callback){
+        Ion.with(context)
+                .load(Constant.INSERT_UPDATE_ANY_GROUP_TABLE)
+                .setBodyParameter(Constant.GROUP_ID, String.valueOf(groupId))
+                .setBodyParameter(Constant.SQL_MESSAGE, sqlMessage)
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        //Check result
+                        Log.e(TAG, "Error: "+e);
+                        Log.w(TAG, "Result: "+result);
+                        if (result!=null){
+                            //success<last-id>
+                            if (result.startsWith(Constant.SUCCESS)){
+                                //Callback lastId
+                                callback.onSuccess(result.substring(7));
+                            }else {
+                                callback.onFailed(result);
+                            }
+                        }else if(e!=null && !e.getMessage().isEmpty()){
+                            callback.onFailed(e.getMessage());
+                        }else {
+                            callback.onFailed(context.getString(R.string.no_result));
+                        }
+
+                    }
+                });
+    }
+
+    public interface OnSingleStringCallback{
+        void onSuccess(String value);
+        void onFailed(String error);
+    }
+
 
 
 }

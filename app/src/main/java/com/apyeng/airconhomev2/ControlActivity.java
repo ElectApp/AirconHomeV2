@@ -453,7 +453,7 @@ public class ControlActivity extends AppCompatActivity {
 
                 case R.id.louver_icon:
                     lastIndoor.louver++;
-                    if (lastIndoor.louver>5){ lastIndoor.louver = 1; }
+                    if (lastIndoor.louver>5){ lastIndoor.louver = 0; }
                     writeCommand(lastIndoor.setLouver(lastIndoor.louver));
                     break;
 
@@ -820,7 +820,7 @@ public class ControlActivity extends AppCompatActivity {
         setModeIcon(lastIndoor.mode);
         setQuietIcon(lastIndoor.quiet);     //Must set quiet icon before fan speed
         setFanIcon(lastIndoor.fan);
-        setLouverIcon(lastIndoor.louver-1);
+        setLouverIcon(lastIndoor.louver);
         setSleepIcon(lastIndoor.sleep);
         setTimer(lastIndoor.timerOn, lastIndoor.onTime, lastIndoor.timerOff, lastIndoor.offTime);
         setEcoIcon(lastIndoor.eco);
@@ -913,13 +913,14 @@ public class ControlActivity extends AppCompatActivity {
     }
 
     private void setLouverIcon(int index){
-        int icon[] = { R.drawable.louver_level_4_icon, R.drawable.louver_level_3_icon,
+        int icon[] = { R.drawable.louver_disable_icon, R.drawable.louver_level_4_icon, R.drawable.louver_level_3_icon,
                 R.drawable.louver_level_2_icon, R.drawable.louver_level_1_icon,
                 R.drawable.louver_swing_icon };
-        if (index>=0 && index<icon.length){
+        if (index>0 && index<icon.length){
             louverIcon.setImageDrawable(getResources().getDrawable(icon[index]));
             louverIcon.setSelected(true);
         }else {
+            louverIcon.setImageDrawable(getResources().getDrawable(icon[0]));
             louverIcon.setSelected(false);
         }
     }

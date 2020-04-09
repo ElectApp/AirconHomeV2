@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:fontFamily">@font/muli_light</item>
+        <!--<item name="android:fontFamily">@font/muli_light</item>-->
         <item name="android:textSize">@dimen/g_text</item>
         <item name="android:textColor">@color/colorTextNormal</item>
 
@@ -153,6 +153,7 @@
         <item name="android:textColorPrimary">@color/colorBlack</item>
         <item name="android:textColorSecondary">@color/colorGray3</item>
     </style>
+
 
 
 </resources>

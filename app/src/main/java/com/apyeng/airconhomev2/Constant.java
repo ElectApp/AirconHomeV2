@@ -29,6 +29,7 @@ public class Constant {
     public static final String MONTHLY_LOG_DATA = HOST + "monthly-log-data.php";
     public static final String DEVICE_FIRMWARE = HOST + "device-firmware.php";
     public static final String SEND_RESET_PASSWORD_EMAIL = HOST + "send-email-reset-password.php";
+    public static final String INSERT_UPDATE_ANY_GROUP_TABLE  = HOST + "insert-update-any-group-table.php";
 
     //Upload path
     private static final String IMAGE_TYPE = "images/";
@@ -53,7 +54,8 @@ public class Constant {
     public static final String LANGUAGE = "language", GROUP_ID_LIST = "group_id_list",
             SIGN_OUT = "sign-out", START_POINT = "start_point", TIME = "time", AC_POWER = "ac_power",
             PV_POWER = "pv_power", DATE = "date", START_DATE = "start-date", END_DATE = "end-date",
-            PV_WH = "pv_wh", START_MONTH = "start-month", END_MONTH = "end-month";
+            PV_WH = "pv_wh", START_MONTH = "start-month", END_MONTH = "end-month",
+            SQL_MESSAGE = "sql-message";
 
     //Result for PHP scripts
     public static final String SUCCESS = "success", CAUSE = "cause", ERROR = "error",
@@ -77,7 +79,7 @@ public class Constant {
     public static final String NO_NETWORK = "no-network", NEW_USER = "new-user",
             RESULT_CODE = "result-code", AC_DATA = "ac-data", INDOOR_DATA = "indoor-data",
             HOME_DATA = "home-data", USER_DATA = "user-data", TIME_ON = "time-on", TIME_OFF = "time-off",
-            DEVICE_HEAD = "device-head", VERSION = "version";
+            DEVICE_HEAD = "device-head", VERSION = "version", POSITION_ID = "position-id";
 
     //Unique code for ActivityResult
     public static final int SELECT_PHOTO = 1728;

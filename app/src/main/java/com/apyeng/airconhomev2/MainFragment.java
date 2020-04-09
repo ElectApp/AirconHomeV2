@@ -4,8 +4,10 @@ package com.apyeng.airconhomev2;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -53,6 +55,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class MainFragment extends Fragment {
 
     private LabelAdapter labelAdapter;
@@ -68,6 +72,7 @@ public class MainFragment extends Fragment {
     private boolean disconnectFlag;
     private static final int PROGRESS = 0, CONTENT = 1, NO_AC = 2;
     private static final int AIR_ITEM_WIDTH_MIN_DP = 228;   //Min width of air item layout (dp unit)
+    private static final int RENAME_CODE = 1725;
     public static final String TAG = "MainFragment";
 
     @Override
@@ -183,6 +188,13 @@ public class MainFragment extends Fragment {
 
             }
         });
+        airItemAdapter.setAirItemLongClickListener(new AirItemAdapter.OnAirItemClickListener() {
+            @Override
+            public void onClick(View view, int position, AirItem airItem) {
+                //Show settings dialog
+                showSettingDialog(position, airItem);
+            }
+        });
         airRv.setAdapter(airItemAdapter);
         //Set space
         airRv.addItemDecoration(decoration);
@@ -194,7 +206,6 @@ public class MainFragment extends Fragment {
         addLabelBtn.setOnWidgetClickListener(new ImageTextButtonWidget.OnWidgetClickListener() {
             @Override
             public void onClick(View view) {
-
 
             }
         });
@@ -232,8 +243,20 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         Log.w(TAG, "onActivityResult...["+requestCode+"] "+resultCode);
+
+        switch (requestCode){
+            case RENAME_CODE:
+                //Update item
+                if(resultCode==RESULT_OK && data!=null){
+                    int p = data.getIntExtra(Constant.POSITION_ID, -1);
+                    AirItem airItem = data.getParcelableExtra(Constant.AC_DATA);
+                    if(airItem!=null && p>-1){
+                        airItemAdapter.setItems(p, airItem);
+                    }
+                }
+                break;
+        }
 
     }
 
@@ -273,6 +296,7 @@ public class MainFragment extends Fragment {
                 : context.getString(R.string.offline);
         String txt = txt1 + txt2;
         numAC.setText(txt);
+        if(total==0){ showContent(NO_AC); }
     }
 
     private void setAirItem(@NonNull String topic, @NonNull MqttMessage message){
@@ -590,6 +614,71 @@ public class MainFragment extends Fragment {
         }
     }
 
+    private void showSettingDialog(final int p, final AirItem airItem){
+        //Create dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(airItem.getNickname()+" | "+airItem.getActualName());
+        //Add list
+        final String[] settings = getResources().getStringArray(R.array.ac_setting_list);
+        builder.setItems(settings, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: // Rename
+                        Intent intent = new Intent(context, RenameACActivity.class);
+                        intent.putExtra(Constant.POSITION_ID, p);
+                        intent.putExtra(Constant.GROUP_ID, groupId);
+                        intent.putExtra(Constant.AC_DATA, airItem);
+                        startActivityForResult(intent, RENAME_CODE);
+                        break;
+                    case 1: // Delete
+                        showConfirmDeleteDialog(airItem);
+                        break;
+                }
+            }
+        });
+        // Create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showConfirmDeleteDialog(final AirItem airItem){
+        String detail = context.getResources().getString(R.string.confirm_delete_ac);
+        detail += " \""+airItem.getNickname()+"\"";
+        Function.showAlertDialog(activity, R.string.delete_ac, detail,
+                R.string.confirm, new MyAlertDialog.OnButtonClickListener() {
+                    @Override
+                    public void onClose() {
+
+                    }
+
+                    @Override
+                    public void onAction(View view) {
+                        Function.dismissDialogFragment(activity, MyAlertDialog.TAG);
+                        //Do
+                        String sql = "DELETE FROM device_data WHERE device_id="+airItem.getDeviceId();
+                        HomeManager manager = new HomeManager(context);
+                        manager.insertUpdateAnyGroupTable(groupId, sql, new HomeManager.OnSingleStringCallback() {
+                            @Override
+                            public void onSuccess(String value) {
+                                Log.w(TAG, "AC deleted...");
+                                Function.showToast(context, R.string.deleted);
+                                //Update list
+                                airItemAdapter.deleteItemID(airItem.getDeviceId());
+                                //Update total
+                                setNumAC();
+                            }
+
+                            @Override
+                            public void onFailed(String error) {
+                                Log.e(TAG, "Delete error: "+error);
+                                Function.showToast(context, R.string.no_result);
+                            }
+                        });
+                    }
+                });
+
+    }
 
 
 

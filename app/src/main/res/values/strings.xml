@@ -88,7 +88,10 @@
     <string name="success">Success</string>
     <string name="failed">Failed, please retry.</string>
     <string name="no_router">Not found Wi-Fi router</string>
-
+    <string name="share">Share</string>
+    <string name="send_to">Send to</string>
+    <string name="rename">Rename</string>
+    <string name="deleted">Deleted</string>
 
     <!-- Bottom Nav -->
     <string name="main">Main</string>
@@ -108,6 +111,13 @@
     <string name="no_ac">No Air Conditioner found</string>
     <string name="no_ac_detail">Press the plus icon to add the first air conditioner to your home.</string>
     <string name="air_conditioner">Air Conditioner</string>
+    <string name="delete_ac">Delete the Air Conditioner</string>
+    <string name="confirm_delete_ac">Are you sure you want to delete</string>
+    <string-array name="ac_setting_list">
+        <item>Rename</item>
+        <item>Delete</item>
+    </string-array>
+
 
     <!-- People Fragment -->
     <string name="no_member">No Member found</string>

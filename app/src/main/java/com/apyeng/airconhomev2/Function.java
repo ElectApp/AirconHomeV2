@@ -341,6 +341,14 @@ public class Function {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 
+    //Thank: http://androidcodesonhands.blogspot.com/2018/07/how-to-get-uri-from-bitmap-image-in.html
+    public static Uri getImageUri(Activity inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
     public static void showFullScreenPicture(Activity activity, Bitmap bitmap){
         //Allow show when bitmap != null
         if (activity!=null && bitmap!=null){
@@ -389,6 +397,21 @@ public class Function {
         bundle.putInt(MyAlertDialog.DETAIL_ID, detailId);
         bundle.putInt(MyAlertDialog.BUTTON_ID, buttonId);
         //Create dialog
+        createMyAlertDialog(activity, bundle, listener);
+    }
+
+    public static void showAlertDialog(
+            Activity activity, int titleId, String detailTxt, int buttonId, MyAlertDialog.OnButtonClickListener listener){
+        //Set data
+        Bundle bundle = new Bundle();
+        bundle.putInt(MyAlertDialog.TITLE_ID, titleId);
+        bundle.putString(MyAlertDialog.DETAIL_TXT, detailTxt);
+        bundle.putInt(MyAlertDialog.BUTTON_ID, buttonId);
+        //Create dialog
+        createMyAlertDialog(activity, bundle, listener);
+    }
+
+    private static void createMyAlertDialog(Activity activity, Bundle bundle, MyAlertDialog.OnButtonClickListener listener){
         MyAlertDialog dialog = new MyAlertDialog();
         FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
         dialog.setArguments(bundle);

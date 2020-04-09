@@ -20,7 +20,7 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
 
     private Context context;
     private List<AirItem> items;
-    private OnAirItemClickListener airItemClickListener;
+    private OnAirItemClickListener airItemClickListener, airItemLongClickListener;
     public static final int OFF_MODE = -1;
     private static final String TAG = "AirItemAdapter";
 
@@ -114,6 +114,18 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
                         AirItem item = items.get(p);
                         airItemClickListener.onClick(view, p, item);
                     }
+                }
+            });
+
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(airItemLongClickListener!=null){
+                        int p = getAdapterPosition();
+                        AirItem item = items.get(p);
+                        airItemLongClickListener.onClick(v, p, item);
+                    }
+                    return false;
                 }
             });
 
@@ -269,6 +281,10 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
 
     public void setAirItemClickListener(OnAirItemClickListener airItemClickListener) {
         this.airItemClickListener = airItemClickListener;
+    }
+
+    public void setAirItemLongClickListener(OnAirItemClickListener airItemLongClickListener) {
+        this.airItemLongClickListener = airItemLongClickListener;
     }
 
     interface OnAirItemClickListener{
