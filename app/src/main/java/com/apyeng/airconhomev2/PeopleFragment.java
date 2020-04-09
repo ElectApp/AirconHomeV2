@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -89,6 +90,15 @@ public class PeopleFragment extends Fragment {
             public void onClick(View view) {
                 //Save file
                 trySaveFile();
+            }
+        });
+
+        RoundButtonWidget shareBtn = view.findViewById(R.id.share_btn);
+        shareBtn.setOnWidgetClickListener(new RoundButtonWidget.OnWidgetClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Share to another app
+                shareImageUri(saveImage(qrBitmap));
             }
         });
 
@@ -229,6 +239,45 @@ public class PeopleFragment extends Fragment {
 
         }
 
+    }
+
+    /**
+     * Saves the image as PNG to the app's cache directory.
+     * @param image Bitmap to save.
+     * @return Uri of the saved file or null
+     */
+    private Uri saveImage(Bitmap image) {
+        //TODO - Should be processed in another thread
+        File imagesFolder = new File(context.getCacheDir(), "images");
+        Uri uri = null;
+        try {
+            imagesFolder.mkdirs();
+            File file = new File(imagesFolder, "qr-shared.png");
+
+            FileOutputStream stream = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.PNG, 90, stream);
+            stream.flush();
+            stream.close();
+            uri = FileProvider.getUriForFile(context, "com.apyeng.fileprovider", file);
+
+        } catch (IOException e) {
+            Log.e(TAG, "IOException while trying to write file for sharing: " + e.getMessage());
+        }
+        return uri;
+    }
+
+    /**
+     * Shares the PNG image from Uri.
+     * @param uri Uri of image to share.
+     *
+     * https://stackoverflow.com/a/50924037
+     */
+    private void shareImageUri(Uri uri){
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setType("image/png");
+        startActivity(intent);
     }
 
     @Override

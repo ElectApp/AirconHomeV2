@@ -59,6 +59,22 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".UpdateFirmwareActivity" />
+
+        <!-- Share picture to another app -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.apyeng.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <!-- Resize window when keyboard visible -->
+        <activity android:name=".RenameACActivity"
+            android:windowSoftInputMode="adjustResize" /> <!-- Resize window when keyboard visible -->
+
     </application>
 
 </manifest>

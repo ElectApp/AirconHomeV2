@@ -69,8 +69,21 @@
             android:id="@+id/save_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/g_margin_top2"
+            android:layout_marginTop="@dimen/g_margin_top2"
+            android:layout_marginStart="@dimen/g_margin_top2"
+            android:layout_marginEnd="@dimen/g_margin_top2"
             app:text="@string/save"/>
+
+        <com.apyeng.airconhomev2.RoundButtonWidget
+            android:id="@+id/share_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/g_margin_top"
+            android:layout_marginStart="@dimen/g_margin_top2"
+            android:layout_marginEnd="@dimen/g_margin_top2"
+            android:layout_marginBottom="@dimen/g_margin_top2"
+            app:buttonColor="@color/colorPrimary"
+            app:text="@string/share"/>
 
     </LinearLayout>
 

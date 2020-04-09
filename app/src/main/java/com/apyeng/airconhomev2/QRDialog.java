@@ -3,18 +3,21 @@ package com.apyeng.airconhomev2;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.app.DialogFragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -29,7 +32,9 @@ import android.widget.Toast;
 import com.github.sumimakito.awesomeqr.AwesomeQRCode;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class QRDialog extends DialogFragment {
 
@@ -54,6 +59,7 @@ public class QRDialog extends DialogFragment {
 
         ImageView qrImg = view.findViewById(R.id.qr_img);
         RoundButtonWidget saveBtn = view.findViewById(R.id.save_btn);
+        RoundButtonWidget shareBtn = view.findViewById(R.id.share_btn);
 
         //Get ID
         id = getArguments().getInt(Constant.GROUP_ID, 0);
@@ -72,6 +78,15 @@ public class QRDialog extends DialogFragment {
             public void onClick(View view) {
                 //Save
                 trySaveFile();
+            }
+        });
+
+        //Share button
+        shareBtn.setOnWidgetClickListener(new RoundButtonWidget.OnWidgetClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Share to another app
+                shareImageUri(saveImage(qrBitmap));
             }
         });
 
@@ -150,11 +165,49 @@ public class QRDialog extends DialogFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
     }
 
+    /**
+     * Saves the image as PNG to the app's cache directory.
+     * @param image Bitmap to save.
+     * @return Uri of the saved file or null
+     */
+    private Uri saveImage(Bitmap image) {
+        //TODO - Should be processed in another thread
+        Context context = getDialog().getContext();
+        File imagesFolder = new File(context.getCacheDir(), "images");
+        Uri uri = null;
+        try {
+            imagesFolder.mkdirs();
+            File file = new File(imagesFolder, "qr-shared.png");
+
+            FileOutputStream stream = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.PNG, 90, stream);
+            stream.flush();
+            stream.close();
+            uri = FileProvider.getUriForFile(context, "com.apyeng.fileprovider", file);
+
+        } catch (IOException e) {
+            Log.e(TAG, "IOException while trying to write file for sharing: " + e.getMessage());
+        }
+        return uri;
+    }
+
+    /**
+     * Shares the PNG image from Uri.
+     * @param uri Uri of image to share.
+     *
+     * https://stackoverflow.com/a/50924037
+     */
+    private void shareImageUri(Uri uri){
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setType("image/png");
+        startActivity(intent);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
