@@ -72,9 +72,11 @@
         </provider>
 
         <!-- Resize window when keyboard visible -->
-        <activity android:name=".RenameACActivity"
+        <activity
+            android:name=".RenameACActivity"
             android:windowSoftInputMode="adjustResize" /> <!-- Resize window when keyboard visible -->
 
+        <activity android:name=".ModbusActivity"></activity>
     </application>
 
 </manifest>

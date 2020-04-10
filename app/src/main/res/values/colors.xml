@@ -99,6 +99,7 @@
         <item>#747474</item>  <!-- Unselected -->
     </array>
 
+    <color name="colorCell">@color/colorAccent</color>
 
 
 

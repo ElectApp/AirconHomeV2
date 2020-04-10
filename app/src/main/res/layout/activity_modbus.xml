@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ModbusActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/g_eva"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/AppTheme.PopupOverlay"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <ImageView
+                android:id="@+id/back_icon"
+                android:layout_width="@dimen/g_ic_s"
+                android:layout_height="@dimen/g_ic_s"
+                android:padding="@dimen/g_ic_p"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_back"
+                android:contentDescription="@string/app_name"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/title_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/modbus_tcp" />
+
+            <Switch
+                android:id="@+id/mb_sw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/g_p_side"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:enabled="false"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/status_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/colorFault"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/g_p_side"
+                    android:singleLine="true"
+                    android:text="@string/no_internet"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/g_p_side"
+                    android:fontFamily="@font/muli_extra_bold"
+                    android:textSize="@dimen/g_text_2"
+                    android:text="@string/tcp_con"/>
+                <TextView
+                    android:id="@+id/con_detail_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/g_p_side"
+                    android:paddingEnd="@dimen/g_p_side"
+                    android:text="IP=, Port="/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/g_p_side"
+                    android:fontFamily="@font/muli_extra_bold"
+                    android:textSize="@dimen/g_text_2"
+                    android:text="@string/device_list"/>
+
+                <LinearLayout
+                    android:layout_width = "fill_parent"
+                    android:layout_height = "wrap_content"
+                    android:background = "@color/colorCell" >
+
+                    <TextView
+                        android:layout_width = "0dp"
+                        android:layout_height = "wrap_content"
+                        android:layout_weight = "1"
+                        android:gravity = "center"
+                        android:padding = "5dp"
+                        android:text = "@string/slave_id"
+                        android:textColor = "@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width = "0dp"
+                        android:layout_height = "wrap_content"
+                        android:layout_weight = "3"
+                        android:gravity = "center"
+                        android:padding = "5dp"
+                        android:text = "@string/name"
+                        android:textColor = "@color/colorWhite"/>
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id = "@+id/device_rv"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/no_ac_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/g_margin_top"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/g_text_big"
+                android:text="@string/no_ac"
+                android:fontFamily="@font/muli_extra_bold"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/circle_progress"
+            android:layout_width="@dimen/circle_progress"
+            android:layout_height="@dimen/circle_progress"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</LinearLayout>

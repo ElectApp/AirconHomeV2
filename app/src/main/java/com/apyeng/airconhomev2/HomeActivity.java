@@ -219,6 +219,7 @@ public class HomeActivity extends AppCompatActivity {
         showMenu(-1);
         //Set data
         Bundle bundle = new Bundle();
+        bundle.putInt(Constant.GROUP_ID, homeItem.getGroupId());
         //Create
         MoreFragment fragment = new MoreFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

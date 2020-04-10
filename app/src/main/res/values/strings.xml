@@ -225,8 +225,20 @@
     <string name="custom">Custom</string>
     <string name="enter_wifi_ssid">Enter Wi-Fi name (SSID)</string>
 
+    <!-- MoreFragment -->
+    <string name="modbus_tcp">Modbus TCP/IP</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!-- ModbusActivity -->
+    <string name="tcp_con">TCP Connection</string>
+    <string name="device_list">Device List</string>
+    <string name="slave_id">Slave ID</string>
+    <string name="name">Name</string>
+    <string name="req_hotspot">Please turn ON your a mobile hotspot and retry.</string>
+    <string name="run_tcp_success">Now your can operating Modbus TCP/IP via</string>
+    <string name="running">Running</string>
+    <string name="mb_ready_title">The Modbus TCP/IP server is ready to use.</string>
+    <string name="mb_ready_detail">You can use a Modbus TCP client software (Ex. Modbus Poll) connect to server via</string>
+    <string name="u_hotspot">your a mobile hotspot.</string>
+    <string name="u_wifi">a local Wi-Fi network.</string>
+    
 </resources>

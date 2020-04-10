@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.SupplicantState;
@@ -26,6 +27,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -172,8 +174,34 @@ public class Function {
         showAppErrorDialog(activity, bundle).setButtonListener(listener);
     }
 
+    public static void showAppErrorDialog(Activity activity, int titleID, int detailID, int buttonID,
+                                          @NonNull AppErrorDialog.OnClickActionButtonListener listener){
+        //Set content
+        Bundle bundle = new Bundle();
+        bundle.putInt(AppErrorDialog.TITLE_ID, titleID);
+        bundle.putInt(AppErrorDialog.DETAIL_ID, detailID);
+        bundle.putInt(AppErrorDialog.BUTTON_ID, buttonID);
+        //Show
+        showAppErrorDialog(activity, bundle).setButtonListener(listener);
+    }
+
+    public static void showAppErrorDialog(Activity activity, int titleID, String detailTxt, int buttonID,
+                                          @NonNull AppErrorDialog.OnClickActionButtonListener listener){
+        //Set content
+        Bundle bundle = new Bundle();
+        bundle.putInt(AppErrorDialog.TITLE_ID, titleID);
+        bundle.putString(AppErrorDialog.DETAIL_TXT, detailTxt);
+        bundle.putInt(AppErrorDialog.BUTTON_ID, buttonID);
+        //Show
+        showAppErrorDialog(activity, bundle).setButtonListener(listener);
+    }
+
     public static void dismissAppErrorDialog(Activity activity){
         dismissDialogFragment(activity, AppErrorDialog.TAG);
+    }
+
+    public static void showAppErrorDialog(Activity activity, int detailID, int buttonID, @NonNull AppErrorDialog.OnClickActionButtonListener listener){
+        Function.showAppErrorDialog(activity, R.string.error, detailID, buttonID, listener);
     }
 
     private static AppErrorDialog showAppErrorDialog(@NonNull Activity activity, @NonNull Bundle bundle){
@@ -250,13 +278,39 @@ public class Function {
     }
 
     public static boolean internetConnected(Context context){
-        ConnectivityManager cm =
-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm!=null){
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        return getConnectionType(context)>0;
+    }
+
+    //Thank: https://stackoverflow.com/a/53243938
+    @IntRange(from = 0, to = 2)
+    public static int getConnectionType(Context context) {
+        int result = 0; // Returns connection type. 0: none; 1: mobile data; 2: wifi
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = 2;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = 1;
+                    }
+                }
+            }
+        } else {
+            if (cm != null) {
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork != null) {
+                    // connected to the internet
+                    if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                        result = 2;
+                    } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                        result = 1;
+                    }
+                }
+            }
         }
-        return false;
+        return result;
     }
 
     public static String get1Digit(int value){
