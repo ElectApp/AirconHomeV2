@@ -80,7 +80,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         }
         //Set image
         String fileName = item.getProfileImg();
-        if (fileName!=null){
+        if (fileName!=null && !fileName.isEmpty()){
             Bitmap img = item.getImageDownloaded();
             if (img!=null){
                 Log.w(TAG, "User old file: "+i);
@@ -183,21 +183,25 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
                 @Override
                 public void onSuccess(LoaderItem item) {
                     //Update list
-                    HomeItem previously = items.get(item.getId());
-                    previously.setImageDownloaded(item.getBitmap());
-                    items.set(item.getId(), previously);
-                    //Update adapter
-                    notifyDataSetChanged();
+                    if(item.getId()<items.size()){
+                        HomeItem previously = items.get(item.getId());
+                        previously.setImageDownloaded(item.getBitmap());
+                        items.set(item.getId(), previously);
+                        //Update adapter
+                        notifyDataSetChanged();
+                    }
                 }
 
                 @Override
                 public void onFailed(LoaderItem item, String error) {
                     //Update list
-                    HomeItem previously = items.get(item.getId());
-                    previously.setProfileImg(null);
-                    items.set(item.getId(), previously);
-                    //Update adapter
-                    notifyDataSetChanged();
+                    if(item.getId()<items.size()){
+                        HomeItem previously = items.get(item.getId());
+                        previously.setProfileImg(null);
+                        items.set(item.getId(), previously);
+                        //Update adapter
+                        notifyDataSetChanged();
+                    }
                 }
             });
         }
