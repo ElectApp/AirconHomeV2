@@ -226,7 +226,7 @@
     <string name="enter_wifi_ssid">Enter Wi-Fi name (SSID)</string>
 
     <!-- MoreFragment -->
-    <string name="modbus_tcp">Modbus TCP/IP</string>
+    <string name="modbus_tcp">Modbus TCP/IP Server</string>
 
     <!-- ModbusActivity -->
     <string name="tcp_con">TCP Connection</string>
@@ -240,5 +240,6 @@
     <string name="mb_ready_detail">You can use a Modbus TCP client software (Ex. Modbus Poll) connect to server via</string>
     <string name="u_hotspot">your a mobile hotspot.</string>
     <string name="u_wifi">a local Wi-Fi network.</string>
-    
+
+
 </resources>

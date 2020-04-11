@@ -1,7 +1,19 @@
 package com.apyeng.airconhomev2;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,6 +81,11 @@ public class ModbusActivity extends AppCompatActivity {
     private static boolean first = false;
     private static final int PROGRESS = 0, CONTENT = 1, NO_AC = 2;
     private static final String TAG = "ModbusTCP";
+
+    //Notification
+    private static final String CHANNEL_ID = "AC-MB-TCP/IP";
+    private int NOTIFY_CODE; //Must change every time that create a new notification
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,6 +291,8 @@ public class ModbusActivity extends AppCompatActivity {
         statusTxt.setText(R.string.running);
         statusTxt.setBackgroundColor(getResources().getColor(R.color.colorGreen));
         showFaultBar(true);
+        //Show notify
+        showNotification(getString(R.string.running)+": "+conTxt.getText());
         //Show dialog only one time
         if(first){ return; }
         first = true;
@@ -299,6 +318,8 @@ public class ModbusActivity extends AppCompatActivity {
         statusTxt.setText(t);
         statusTxt.setBackgroundColor(getResources().getColor(R.color.colorGreen));
         showFaultBar(true);
+        //Show notify
+        showNotification(t);
     }
 
     private void showFaultStatus(String txt){
@@ -526,6 +547,8 @@ public class ModbusActivity extends AppCompatActivity {
                         showFaultStatus(detail);
                         break;
                     case STARTED:
+                        clearNotification(); //Clear
+                        NOTIFY_CODE = (int) (System.currentTimeMillis()); //Get new id
                         showRunningStatus();
                         break;
                     case CONNECTED:
@@ -543,6 +566,8 @@ public class ModbusActivity extends AppCompatActivity {
             //Update toolbar
             showFaultBar(false);
             mbSw.setChecked(false);
+            //Remove notify
+            clearNotification();
         }
 
         private void stop(){
@@ -658,6 +683,53 @@ public class ModbusActivity extends AppCompatActivity {
 
     }
 
+    private void showNotification(@NonNull String detail){
+        //App icon
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_icon_normal);
+        //Create intent click without new create activity
+        //Thank: https://stackoverflow.com/a/48443809
+        Intent intent = new Intent(this, ModbusActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP );
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        PendingIntent pi = PendingIntent.getActivity(this, NOTIFY_CODE, intent, PendingIntent.FLAG_ONE_SHOT);
+        //Set notification
+        Notification n = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setDefaults(NotificationCompat.DEFAULT_SOUND | NotificationCompat.DEFAULT_VIBRATE)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setLights(Color.BLUE, 1000, 2000)
+                .setSmallIcon(R.drawable.tcp_icon)
+                        .setLargeIcon(bitmap)
+                .setContentTitle(getString(R.string.modbus_tcp))
+                .setContentText(detail)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pi)
+                .build();
+
+        //Set NotificationManager instance
+        NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager!=null){
+            //Check SDK for notification on Android 8.0 (Oreo)
+            //Thank: https://stackoverflow.com/questions/43093260/notification-not-showing-in-oreo
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+                //Create Channel
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                        getString(R.string.app_name), NotificationManager.IMPORTANCE_HIGH);
+                manager.createNotificationChannel(channel);
+            }
+            //Clear previously
+            manager.cancel(NOTIFY_CODE);
+            //Show new Notification
+            manager.notify(NOTIFY_CODE, n);
+            Log.w(TAG, "Notify created..."+NOTIFY_CODE);
+        }
+
+    }
+
+    private void clearNotification(){
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager!=null){ manager.cancelAll(); }
+    }
 
 
 
