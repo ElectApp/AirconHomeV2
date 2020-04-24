@@ -1,46 +1,28 @@
 package com.apyeng.airconhomev2;
 
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -49,10 +31,9 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttToken;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -94,7 +75,7 @@ public class MainFragment extends Fragment {
                     //Hide
                     faultTxt.setVisibility(View.GONE);
                     //Re-subscribe
-                    subscribeGroup();
+                    //subscribeGroup();
                     subscribeDevice(airItemAdapter.getItems());
                 }
             }
@@ -253,6 +234,10 @@ public class MainFragment extends Fragment {
                     AirItem airItem = data.getParcelableExtra(Constant.AC_DATA);
                     if(airItem!=null && p>-1){
                         airItemAdapter.setItems(p, airItem);
+                        airItemAdapter.notifyItemChanged(p);
+                        //Publish to rename and save on device
+                        publish(airItem.getDeviceId(), new String[]{Indoor.SET_NICKNAME,
+                                airItem.getNickname()});
                     }
                 }
                 break;
@@ -334,6 +319,7 @@ public class MainFragment extends Fragment {
                     break;
             }
         }
+
         //Update number of list
         if (s.length==2){
             String v[] = message.toString().split(",");
@@ -543,6 +529,27 @@ public class MainFragment extends Fragment {
         }
     }
 
+    private void publish(int deviceId, String[] details){
+        String topic = String.valueOf(groupId)+"/"+deviceId+"/"+Constant.REQUEST;
+        String d = "";
+        for (String v : details){
+            d = d.concat(v);
+            d = d.concat(",");
+        }
+        Log.w(TAG, "Publish: ["+topic+"] "+d);
+        setPublish(topic, d);
+    }
+
+    private void setPublish(String topic, String value){
+        try {
+            byte[] encodedPayload = value.getBytes("UTF-8");
+            MqttMessage message = new MqttMessage(encodedPayload);
+            mqtt.publish(topic, message);
+        } catch (UnsupportedEncodingException | MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
     private float convertPixelToDP(int px){
         //Convert DP to Pixel
         //Thank: https://developer.android.com/training/multiscreen/screendensities#java
@@ -663,6 +670,8 @@ public class MainFragment extends Fragment {
                             public void onSuccess(String value) {
                                 Log.w(TAG, "AC deleted...");
                                 Function.showToast(context, R.string.deleted);
+                                //Publish for switch mode from ST to AP
+                                publish(airItem.getDeviceId(), new String[]{Indoor.SWITCH_MODE, "AP"});
                                 //Update list
                                 airItemAdapter.deleteItemID(airItem.getDeviceId());
                                 //Update total

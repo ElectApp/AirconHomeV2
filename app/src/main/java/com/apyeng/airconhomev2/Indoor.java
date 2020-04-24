@@ -17,6 +17,9 @@ public class Indoor implements Parcelable{
     public static final String SET_TIMER = "8";
     public static final String ABOUT = "9";
     public static final String CONFIG_CONNECT_ROUTER = "10";
+    public static final String SET_NICKNAME = "11";     //Set only nickname of device
+    public static final String MB_READ = "12";
+    public static final String SCAN_WIFI = "13";
     //Result & Modbus error
     public static final String ON_SUCCESS = "success";
     public static final String ON_TEST = "Frecon WiFi Module 2018";

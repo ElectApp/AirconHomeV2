@@ -459,7 +459,6 @@ public class AddDeviceActivity extends AppCompatActivity {
         }
     }
 
-
     private void checkACConnected(){
         //Show progress
         Function.showLoadingDialog(this);
