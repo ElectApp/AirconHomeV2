@@ -71,6 +71,7 @@ public class MyAlertDialog extends DialogFragment {
                 }else {
                     detail.setText(detailTxt);
                 }
+                detail.setVisibility(View.GONE);
                 ePass.setVisibility(View.GONE);
                 break;
 
