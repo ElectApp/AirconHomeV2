@@ -44,14 +44,8 @@ public class NoNetworkDialog extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+        this.activity = getActivity();
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-    }
-
 
     @Nullable
     @Override
