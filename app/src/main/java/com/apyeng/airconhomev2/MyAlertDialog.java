@@ -1,6 +1,5 @@
 package com.apyeng.airconhomev2;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -20,11 +19,12 @@ import android.widget.TextView;
 
 public class MyAlertDialog extends DialogFragment {
 
-    private int titleId, detailId, btnId;
-    private String detailTxt;
+    private int titleId, detailId, btnId, vObj;
+    private String detailTxt="", titleTxt="";
     private OnButtonClickListener clickListener;
-    public static final String BUTTON_ID = "button-id", TITLE_ID = "title-id",
-            DETAIL_ID = "detail-id", DETAIL_TXT = "detail-txt";
+    public static final String BUTTON_ID = "button-id", TITLE_ID = "title-id", TITLE_TXT = "title-txt",
+            DETAIL_ID = "detail-id", DETAIL_TXT = "detail-txt", VISIBLE_OBJ = "visible-object";
+    public static final int DETAIL_ONLY = 0, FILL_DATA_ONLY = 1, FILL_PASSWORD_ONLY = 2, ALL = 3;
     public static final String TAG = "MyAlertDialog"; //Unique TAG
 
     @Override
@@ -36,11 +36,11 @@ public class MyAlertDialog extends DialogFragment {
         //Get data
         Bundle bundle = getArguments();
         titleId = bundle.getInt(TITLE_ID, R.string.error);
+        titleTxt = bundle.getString(TITLE_TXT);
         detailId = bundle.getInt(DETAIL_ID, 0);
         detailTxt = bundle.getString(DETAIL_TXT);
         btnId = bundle.getInt(BUTTON_ID, R.string.ok);
-
-        Log.w(TAG, "Title: "+titleId+", "+detailId+", "+detailTxt+", "+btnId);
+        vObj = bundle.getInt(VISIBLE_OBJ, DETAIL_ONLY);
 
     }
 
@@ -54,14 +54,43 @@ public class MyAlertDialog extends DialogFragment {
 
         TextView title = view.findViewById(R.id.alert_title);
         TextView detail = view.findViewById(R.id.alert_detail);
+        final ClearableEditText eData = view.findViewById(R.id.enter_data);
+        final PasswordEditText ePass = view.findViewById(R.id.enter_password);
         TextView btn = view.findViewById(R.id.alert_btn);
 
-        title.setText(titleId);
-
-        if (detailId!=0){
-            detail.setText(detailId);
+        if(titleId!=0){
+            title.setText(titleId);
         }else {
-            detail.setText(detailTxt);
+            title.setText(titleTxt);
+        }
+
+        switch (vObj){
+            case DETAIL_ONLY:
+                if (detailId!=0){
+                    detail.setText(detailId);
+                }else {
+                    detail.setText(detailTxt);
+                }
+                ePass.setVisibility(View.GONE);
+                break;
+
+            case FILL_DATA_ONLY:
+                detail.setVisibility(View.GONE);
+                ePass.setVisibility(View.GONE);
+                break;
+
+            case FILL_PASSWORD_ONLY:
+                detail.setVisibility(View.GONE);
+                eData.setVisibility(View.GONE);
+                break;
+
+            case ALL:
+                if (detailId!=0){
+                    detail.setText(detailId);
+                }else {
+                    detail.setText(detailTxt);
+                }
+                break;
         }
 
         btn.setText(btnId);
@@ -81,7 +110,7 @@ public class MyAlertDialog extends DialogFragment {
             public void onClick(View view) {
                // dismiss();
                 if (clickListener!=null){
-                    clickListener.onAction(view);
+                    clickListener.onAction(String.valueOf(eData.getText()), String.valueOf(ePass.getText()));
                 }
             }
         });
@@ -141,7 +170,7 @@ public class MyAlertDialog extends DialogFragment {
 
     interface OnButtonClickListener{
         void onClose();
-        void onAction(View view);
+        void onAction(String data, String password);
     }
 
 

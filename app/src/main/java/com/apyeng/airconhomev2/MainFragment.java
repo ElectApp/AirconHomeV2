@@ -660,7 +660,7 @@ public class MainFragment extends Fragment {
                     }
 
                     @Override
-                    public void onAction(View view) {
+                    public void onAction(String data, String password) {
                         Function.dismissDialogFragment(activity, MyAlertDialog.TAG);
                         //Do
                         String sql = "DELETE FROM device_data WHERE device_id="+airItem.getDeviceId();

@@ -473,7 +473,7 @@ public class ControlActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onAction(View view) {
+                            public void onAction(String data, String password) {
                                 //Hide
                                 Function.dismissDialogFragment(ControlActivity.this, MyAlertDialog.TAG);
                                 //Disable timer without checking Power status

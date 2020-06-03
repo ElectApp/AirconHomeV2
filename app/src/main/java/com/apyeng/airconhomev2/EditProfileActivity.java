@@ -415,7 +415,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onAction(View view) {
+                    public void onAction(String data, String password) {
                         //Hide dialog
                         Function.dismissDialogFragment(EditProfileActivity.this, MyAlertDialog.TAG);
                         //Sign out

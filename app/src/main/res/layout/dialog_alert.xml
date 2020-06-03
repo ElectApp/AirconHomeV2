@@ -38,20 +38,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/alert_detail"
+        <LinearLayout
+            android:id="@+id/lay_contain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
             android:padding="16dp"
-            android:text="detail"
-            android:textSize="@dimen/g_text_3"
             app:layout_constraintBottom_toTopOf="@+id/alert_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alert_title" />
+            app:layout_constraintTop_toBottomOf="@+id/alert_title">
 
+            <TextView
+                android:id="@+id/alert_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="detail"
+                android:textSize="@dimen/g_text_3" />
+
+            <com.apyeng.airconhomev2.ClearableEditText
+                android:id="@+id/enter_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/enter_background_1"
+                android:singleLine="true"
+                android:textSize="@dimen/g_text_3"
+                android:textColor="@color/colorTextNormal"/>
+
+            <com.apyeng.airconhomev2.PasswordEditText
+                android:id="@+id/enter_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/enter_background_1"
+                android:singleLine="true"
+                android:hint="@string/enter_password"
+                android:textSize="@dimen/g_text_3"
+                android:textColor="@color/colorTextNormal"
+                android:textColorHint="@color/colorGray3"/>
+
+        </LinearLayout>
 
         <View
             android:id="@+id/line"

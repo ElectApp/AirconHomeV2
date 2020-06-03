@@ -402,7 +402,7 @@ public class JoinActivity extends AppCompatActivity implements ZXingScannerView.
             }
 
             @Override
-            public void onAction(View view) {
+            public void onAction(String data, String password) {
                 Log.w(TAG, "Click action on dialog...");
                 Function.dismissDialogFragment(JoinActivity.this, MyAlertDialog.TAG);
                 restartScanner();

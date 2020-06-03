@@ -332,7 +332,7 @@ public class HomeListActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onAction(View view) {
+                    public void onAction(String data, String password) {
                         Function.dismissDialogFragment(HomeListActivity.this, MyAlertDialog.TAG);
                         //Do
                         homeManager.leaveGroup(groupId, userId, new HomeManager.OnSetHomeListener() {

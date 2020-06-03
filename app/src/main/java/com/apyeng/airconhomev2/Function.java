@@ -465,6 +465,18 @@ public class Function {
         createMyAlertDialog(activity, bundle, listener);
     }
 
+    public static void showPasswordDialog(
+            Activity activity, String titleTxt, int buttonId, MyAlertDialog.OnButtonClickListener listener){
+        //Set data
+        Bundle bundle = new Bundle();
+        bundle.putInt(MyAlertDialog.TITLE_ID, 0);
+        bundle.putString(MyAlertDialog.TITLE_TXT, titleTxt);
+        bundle.putInt(MyAlertDialog.BUTTON_ID, buttonId);
+        bundle.putInt(MyAlertDialog.VISIBLE_OBJ, MyAlertDialog.FILL_PASSWORD_ONLY);
+        //Create dialog
+        createMyAlertDialog(activity, bundle, listener);
+    }
+
     private static void createMyAlertDialog(Activity activity, Bundle bundle, MyAlertDialog.OnButtonClickListener listener){
         MyAlertDialog dialog = new MyAlertDialog();
         FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
