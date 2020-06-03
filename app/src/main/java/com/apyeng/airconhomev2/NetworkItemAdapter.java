@@ -16,6 +16,7 @@ public class NetworkItemAdapter extends RecyclerView.Adapter<NetworkItemAdapter.
     private ArrayList<NetworkItem> items;
     private Context context;
     private OnClickItemListener onClickItemListener;
+    private OnHoldPressItemListener onHoldPressItemListener;
 
     public NetworkItemAdapter(Context context, ArrayList<NetworkItem> items){
         this.context = context;
@@ -35,8 +36,15 @@ public class NetworkItemAdapter extends RecyclerView.Adapter<NetworkItemAdapter.
         NetworkItem item = items.get(i);
         //Set data
         v.tvSSID.setText(item.ssid);
-        v.tvBSSID.setText(item.bssid);
+        v.tvBSSID.setText(item.status!=null? item.status:item.bssid);
         v.setRSSI(item.rssi);
+        String t = "";
+        if (item.auth!=-1){
+            t += item.auth>0? "Secured":"Open";
+            t += "\n";
+        }
+        t += item.rssi+" dBm";
+        v.tvRSSI.setText(t);
     }
 
     @Override
@@ -67,6 +75,16 @@ public class NetworkItemAdapter extends RecyclerView.Adapter<NetworkItemAdapter.
                 });
             }
 
+            if(onHoldPressItemListener!=null){
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        int p = getAdapterPosition();
+                        onHoldPressItemListener.onPress(p, items.get(p));
+                        return false;
+                    }
+                });
+            }
         }
 
         private void setRSSI(int rssi){
@@ -83,7 +101,15 @@ public class NetworkItemAdapter extends RecyclerView.Adapter<NetworkItemAdapter.
         this.onClickItemListener = onClickItemListener;
     }
 
+    public void setOnHoldPressItemListener(OnHoldPressItemListener onHoldPressItemListener) {
+        this.onHoldPressItemListener = onHoldPressItemListener;
+    }
+
     public interface OnClickItemListener{
         void onClick(int position, NetworkItem item);
+    }
+
+    public interface OnHoldPressItemListener{
+        void onPress(int position, NetworkItem item);
     }
 }

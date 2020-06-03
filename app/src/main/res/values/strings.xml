@@ -70,6 +70,7 @@
     <string name="retry">Retry</string>
     <string name="no_ac_connected">No Air Conditioner (A/C) connection</string>
     <string name="upload_failed_title">Upload Image failed</string>
+    <string name="get_connected">Get connected</string>
 
     <!-- Join Activity -->
     <string name="join_member">Join Membership</string>
@@ -241,5 +242,19 @@
     <string name="u_hotspot">your a mobile hotspot.</string>
     <string name="u_wifi">a local Wi-Fi network.</string>
 
+    <!-- WiFi Connection -->
+    <string name="wifi_conn">Wi-Fi Connectivity</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="enable_wifi">Switch to enable Wi-Fi</string>
+    <string name="enabled">Enabled</string>
+    <string name="enabling">Enabling</string>
+    <string name="disabling">Disabling</string>
+    <string name="scan">Scan</string>
+    <string name="scanning">Scanning</string>
+    <string name="connect">Connect</string>
+    <string name="forget_network">Forget Network</string>
+    <string name="forget_network_details">Do you want to forget this network?</string>
+    <string name="cancel">Cancel</string>
+    <string name="forget">Forget</string>
 
 </resources>

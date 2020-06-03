@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,6 +52,7 @@ public class AddDeviceActivity extends AppCompatActivity {
     private List<File> cacheFileList;
     private Bitmap profileBitmap;
     private TCPMessage tcpMessage;
+    private WiFiConnectionDialog wiFiConnectionDialog;
     private static final int CONNECT_AC = 2023;
     private static final String TAG = "AddDeviceActivity";
 
@@ -204,7 +206,6 @@ public class AddDeviceActivity extends AppCompatActivity {
         showLayout();
         //Get location
         tryGetLocation();
-
     }
 
 
@@ -223,15 +224,6 @@ public class AddDeviceActivity extends AppCompatActivity {
                     if (selectedImage!=null){
                         //Set img file and preview
                         setImgFile(selectedImage);
-
-                        /* //Direct upload from original file
-                        FileHelder helder = new FileHelder();
-                        String path = helder.getUriRealPathAboveKitkat(this, selectedImage);
-                        Log.w(TAG, "Path2: "+path);
-                        File file = new File(path);
-                        HomeManager homeManager = new HomeManager(this, this);
-                        homeManager.upload(Constant.GROUP_IMG_DIR, file, null);
-                        */
                     }
                 }
                 break;
@@ -266,14 +258,21 @@ public class AddDeviceActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == Constant.LOCATION_CODE){
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                //User allowed the location and you can read it now
-                tryGetLocation();
-            }else {
-                //back to previously
-                setResultActivity();
-            }
+        switch (requestCode){
+            case Constant.LOCATION_CODE:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //User allowed the location and you can read it now
+                    tryGetLocation();
+                }else {
+                    //back to previously
+                    setResultActivity();
+                }
+                break;
+            case WiFiConnectionDialog.PERMISSION_CODE:
+                if (wiFiConnectionDialog!=null && wiFiConnectionDialog.isVisible()){
+                    wiFiConnectionDialog.onPermissionResult(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+                }
+                break;
         }
     }
 
@@ -432,7 +431,30 @@ public class AddDeviceActivity extends AppCompatActivity {
                 }
                 break;
             case 1: //Connect to AC WiFi
-                startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), CONNECT_AC);
+                if (Build.VERSION.SDK_INT<Build.VERSION_CODES.Q){ //Settings.ACTION_WIFI_SETTINGS
+                    //My Wi-Fi connectivity
+                    wiFiConnectionDialog = new WiFiConnectionDialog();
+                    wiFiConnectionDialog.setSsidFilter("AC-");
+                    wiFiConnectionDialog.setWiFiCallback(new WiFiConnectionDialog.WiFiCallback() {
+                        @Override
+                        public void onRequestPermission(@NonNull String[] permissions) {
+                            ActivityCompat.requestPermissions(AddDeviceActivity.this,
+                                    permissions, WiFiConnectionDialog.PERMISSION_CODE);
+                        }
+
+                        @Override
+                        public void onDone(NetworkItem item) {
+                            if (item!=null){
+                                Log.w(TAG, "Try check A/C..."+item.ssid);
+                                checkACConnected();
+                            }
+                        }
+                    });
+                    wiFiConnectionDialog.show(getSupportFragmentManager(), WiFiConnectionDialog.TAG);
+                }else{
+                    //Setting panel for Android 10
+                    startActivityForResult(new Intent(Settings.Panel.ACTION_WIFI), CONNECT_AC);
+                }
                 break;
             case 2: //Set nickname of AC
                 nickname = String.valueOf(nicknameEnter.getText()).trim();

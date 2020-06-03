@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorGray3"
         android:layout_gravity="center"
+        android:gravity="end"
         android:text="-50 dBm"/>
 
 </LinearLayout>
