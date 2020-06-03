@@ -6,9 +6,15 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +71,7 @@ public class AppErrorDialog extends DialogFragment {
         TextView title = view.findViewById(R.id.title);
         TextView detail = view.findViewById(R.id.detail);
         RoundButtonWidget action = view.findViewById(R.id.action_btn);
+        RoundButtonWidget conBtn = view.findViewById(R.id.connect_btn);
 
         //Set title
         if (titleId!=0){ title.setText(titleId); }
@@ -75,22 +82,49 @@ public class AppErrorDialog extends DialogFragment {
             detail.setText(detailTxt);
         }
         //Set button
+        conBtn.setVisibility(titleId==R.string.no_internet? View.VISIBLE:View.GONE);
         if (buttonId!=0){ action.setText(buttonId); }
 
         //Set click listener
+        conBtn.setOnWidgetClickListener(new RoundButtonWidget.OnWidgetClickListener() {
+            @Override
+            public void onClick(final View view) {
+                if (Build.VERSION.SDK_INT<Build.VERSION_CODES.Q){ //Settings.ACTION_WIFI_SETTINGS
+                    //My Wi-Fi connectivity
+                    WiFiConnectionDialog dialog = new WiFiConnectionDialog();
+                    dialog.setWiFiCallback(new WiFiConnectionDialog.WiFiCallback() {
+                        @Override
+                        public void onRequestPermission(@NonNull String[] permissions) {
+                            ActivityCompat.requestPermissions(activity,
+                                    permissions, WiFiConnectionDialog.PERMISSION_CODE);
+                        }
+
+                        @Override
+                        public void onDone(NetworkItem item) {
+                            if (item!=null){
+                                Log.w(TAG, "Reload with..."+item.ssid);
+                                if (buttonListener!=null){
+                                    buttonListener.onClick(view, titleId, buttonId);
+                                }
+                            }
+                        }
+                    });
+                    //Show DialogFragment inside DialogFragment
+                    //Thank: https://stackoverflow.com/a/40342348
+                    FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
+                    dialog.show(manager, WiFiConnectionDialog.TAG);
+                }else{
+                    //Setting panel for Android 10
+                    startActivityForResult(new Intent(Settings.Panel.ACTION_WIFI), 1335);
+                }
+            }
+        });
         action.setOnWidgetClickListener(new RoundButtonWidget.OnWidgetClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (buttonId==R.string.connect_ac_wifi){
-                    //Connect AC
-                    startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 1);
-                }
-
                 if (buttonListener!=null){
                     buttonListener.onClick(view, titleId, buttonId);
                 }
-
             }
         });
 

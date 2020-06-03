@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/action_btn"
+        app:layout_constraintBottom_toTopOf="@+id/connect_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,15 +52,24 @@
 
     </LinearLayout>
 
+    <com.apyeng.airconhomev2.RoundButtonWidget
+        android:id="@+id/connect_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:buttonColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/action_btn"
+        app:text="@string/get_connected"
+        app:textSize="@dimen/g_text_3" />
 
     <com.apyeng.airconhomev2.RoundButtonWidget
         android:id="@+id/action_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/g_btn_bottom_margin"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:text="@string/retry"
-        app:textSize="@dimen/g_text_3"/>
+        app:textSize="@dimen/g_text_3" />
 
 
 </android.support.constraint.ConstraintLayout>

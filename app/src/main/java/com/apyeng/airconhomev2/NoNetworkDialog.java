@@ -3,11 +3,18 @@ package com.apyeng.airconhomev2;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +23,8 @@ import android.widget.TextView;
 
 public class NoNetworkDialog extends DialogFragment {
 
+    private Context context;
+    private Activity activity;
     private boolean isNoInternet; //False = No AC connected, True = No Internet
     public static final String TAG = "NoNetworkDialog"; //Unique TAG
 
@@ -31,6 +40,19 @@ public class NoNetworkDialog extends DialogFragment {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +63,7 @@ public class NoNetworkDialog extends DialogFragment {
         TextView title = view.findViewById(R.id.no_network_title);
         TextView detail = view.findViewById(R.id.no_network_detail);
         RoundButtonWidget action = view.findViewById(R.id.action_btn);
+        RoundButtonWidget conBtn = view.findViewById(R.id.connect_btn);
 
         if (!isNoInternet){
             title.setText(R.string.no_ac_connected);
@@ -51,6 +74,43 @@ public class NoNetworkDialog extends DialogFragment {
             detail.setText(R.string.no_internet_detail);
             action.setText(R.string.retry);
         }
+
+        //Connect
+        conBtn.setOnWidgetClickListener(new RoundButtonWidget.OnWidgetClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT<Build.VERSION_CODES.Q){ //Settings.ACTION_WIFI_SETTINGS
+                    //My Wi-Fi connectivity
+                    WiFiConnectionDialog dialog = new WiFiConnectionDialog();
+                    if (!isNoInternet){ dialog.setSsidFilter("AC"); }
+                    dialog.setWiFiCallback(new WiFiConnectionDialog.WiFiCallback() {
+                        @Override
+                        public void onRequestPermission(@NonNull String[] permissions) {
+                            ActivityCompat.requestPermissions(activity,
+                                    permissions, WiFiConnectionDialog.PERMISSION_CODE);
+                        }
+
+                        @Override
+                        public void onDone(NetworkItem item) {
+                            if (item!=null){
+                                Log.w(TAG, "Reload with..."+item.ssid);
+                                //Recheck internet
+                                if (Function.internetConnected(getDialog().getContext())){
+                                    dismiss();
+                                }
+                            }
+                        }
+                    });
+                    //Show DialogFragment inside DialogFragment
+                    //Thank: https://stackoverflow.com/a/40342348
+                    FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
+                    dialog.show(manager, WiFiConnectionDialog.TAG);
+                }else{
+                    //Setting panel for Android 10
+                    startActivityForResult(new Intent(Settings.Panel.ACTION_WIFI), 1335);
+                }
+            }
+        });
 
         action.setOnWidgetClickListener(new RoundButtonWidget.OnWidgetClickListener() {
             @Override
@@ -71,7 +131,6 @@ public class NoNetworkDialog extends DialogFragment {
         return view;
 
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
