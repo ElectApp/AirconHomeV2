@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.apyeng.airconhomev2"
-        minSdkVersion 21
-        targetSdkVersion 28     //Set target SDK for support Android 9.0
-        versionCode 8           //Modbus TCP
-        versionName "3.3"
+        minSdkVersion 23        //Android 6.0
+        targetSdkVersion 29     //Set target SDK for support Android 10
+        versionCode 9           //Wi-Fi Connection
+        versionName "3.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
