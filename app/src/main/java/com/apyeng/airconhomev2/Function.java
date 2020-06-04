@@ -36,6 +36,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.apyeng.airconhomev2.Interfaces.StringCallback;
+
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -48,6 +55,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import static android.content.Context.WIFI_SERVICE;
+import static com.android.volley.Request.Method.GET;
 
 public class Function {
 
@@ -277,8 +285,29 @@ public class Function {
         }
     }
 
+    //Work only Wi-Fi or Cellular connected but can't check internet
     public static boolean internetConnected(Context context){
         return getConnectionType(context)>0;
+    }
+     
+    public static void checkInternet(Context context, @NonNull final StringCallback callback){
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(context);
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(GET, "https://www.youtube.com/",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        callback.onResponse("Internet is available.");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callback.onError(error.getMessage());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
     //Thank: https://stackoverflow.com/a/53243938

@@ -278,17 +278,22 @@ public class AddDeviceActivity extends AppCompatActivity {
     }
 
     private void showNetworkDialog(){
-        //Show Network Scanning by WiFi Module
-        ModuleScanWiFiDialog.show(AddDeviceActivity.this,
-                new NetworkItemAdapter.OnClickItemListener() {
-                    @Override
-                    public void onClick(int position, NetworkItem item) {
-                        //Update SSID
-                        ssidTxt.setText(item.ssid);
-                        //Clear
-                        passwordEnter.setText(onDevice.getWiFiPassword(item.ssid));
-                    }
-                });
+        //A/C connected?
+        if(actualName.equals(Function.getSSID(this))){
+            //Show Network Scanning by WiFi Module
+            ModuleScanWiFiDialog.show(AddDeviceActivity.this,
+                    new NetworkItemAdapter.OnClickItemListener() {
+                        @Override
+                        public void onClick(int position, NetworkItem item) {
+                            //Update SSID
+                            ssidTxt.setText(item.ssid);
+                            //Clear
+                            passwordEnter.setText(onDevice.getWiFiPassword(item.ssid));
+                        }
+                    });
+        }else {
+            Function.showNoNetworkDialog(this, false);
+        }
     }
 
     private void countDownStep(){
