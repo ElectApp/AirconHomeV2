@@ -93,6 +93,7 @@
     <string name="send_to">Send to</string>
     <string name="rename">Rename</string>
     <string name="deleted">Deleted</string>
+    <string name="internet">internet</string>
 
     <!-- Bottom Nav -->
     <string name="main">Main</string>

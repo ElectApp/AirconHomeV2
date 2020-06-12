@@ -289,7 +289,7 @@ public class Function {
     public static boolean internetConnected(Context context){
         return getConnectionType(context)>0;
     }
-     
+
     public static void checkInternet(Context context, @NonNull final StringCallback callback){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);

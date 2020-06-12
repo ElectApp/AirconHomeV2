@@ -76,7 +76,9 @@ public class AppErrorDialog extends DialogFragment {
             detail.setText(detailTxt);
         }
         //Set button
-        conBtn.setVisibility(titleId==R.string.no_internet? View.VISIBLE:View.GONE);
+        boolean cf = titleId==R.string.no_internet || String.valueOf(detail.getText())
+                .contains(context.getString(R.string.internet).toLowerCase());
+        conBtn.setVisibility(cf? View.VISIBLE:View.GONE);
         if (buttonId!=0){ action.setText(buttonId); }
 
         //Set click listener
