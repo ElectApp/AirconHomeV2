@@ -291,8 +291,8 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailed(String error) {
                 Log.e(TAG, "Update home failed..."+error);
                 //Show
-                Function.showNoResultDialog(
-                        EditProfileActivity.this, errorListener);
+                Function.showDBErrorDialog(
+                        EditProfileActivity.this, error, errorListener);
             }
         });
 
@@ -326,8 +326,8 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailed(String error) {
                 Log.e(TAG, "Update user data failed..."+error);
                 //Show
-                Function.showNoResultDialog(
-                        EditProfileActivity.this, errorListener);
+                Function.showDBErrorDialog(
+                        EditProfileActivity.this, error, errorListener);
             }
         });
     }

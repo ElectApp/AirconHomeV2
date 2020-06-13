@@ -154,7 +154,15 @@ public class Function {
         bundle.putInt(AppErrorDialog.BUTTON_ID, R.string.retry);
         //Show
         showAppErrorDialog(activity, bundle).setButtonListener(listener);
+    }
 
+    public static void showDBErrorDialog(@NonNull Activity activity, @NonNull String error,
+                                         @NonNull AppErrorDialog.OnClickActionButtonListener listener){
+        if(error.equals(activity.getApplicationContext().getString(R.string.no_result))){
+            showNoResultDialog(activity, listener);
+        }else{
+            showAppErrorDialog(activity, error, "", R.string.retry, listener);
+        }
     }
 
     public static void showNoInternetDialog(
@@ -198,6 +206,17 @@ public class Function {
         //Set content
         Bundle bundle = new Bundle();
         bundle.putInt(AppErrorDialog.TITLE_ID, titleID);
+        bundle.putString(AppErrorDialog.DETAIL_TXT, detailTxt);
+        bundle.putInt(AppErrorDialog.BUTTON_ID, buttonID);
+        //Show
+        showAppErrorDialog(activity, bundle).setButtonListener(listener);
+    }
+
+    public static void showAppErrorDialog(Activity activity, String titleTxt, String detailTxt, int buttonID,
+                                          @NonNull AppErrorDialog.OnClickActionButtonListener listener){
+        //Set content
+        Bundle bundle = new Bundle();
+        bundle.putString(AppErrorDialog.TITLE_TXT, titleTxt);
         bundle.putString(AppErrorDialog.DETAIL_TXT, detailTxt);
         bundle.putInt(AppErrorDialog.BUTTON_ID, buttonID);
         //Show

@@ -24,15 +24,15 @@ import android.widget.Toast;
 
 public class AppErrorDialog extends DialogFragment {
 
-    private int titleId, detailId, buttonId;
+    private int titleId=0, detailId=0, buttonId=0;
     private int count;
-    private String detailTxt;
+    private String titleTxt="", detailTxt="";
     private Context context;
     private Activity activity;
     private OnClickActionButtonListener buttonListener;
 
-    public static final String TITLE_ID = "title", DETAIL_ID = "detail", DETAIL_TXT = "detail-txt",
-            BUTTON_ID = "button";
+    public static final String TITLE_ID = "title", DETAIL_ID = "detail", TITLE_TXT = "title-txt",
+            DETAIL_TXT = "detail-txt", BUTTON_ID = "button";
     public static final String TAG = "AppErrorDialog"; //Unique TAG
 
     @Override
@@ -53,6 +53,7 @@ public class AppErrorDialog extends DialogFragment {
         detailId = bundle.getInt(DETAIL_ID);
         buttonId = bundle.getInt(BUTTON_ID);
         detailTxt = bundle.getString(DETAIL_TXT);
+        titleTxt = bundle.getString(TITLE_TXT);
     }
 
     @Nullable
@@ -68,7 +69,11 @@ public class AppErrorDialog extends DialogFragment {
         RoundButtonWidget conBtn = view.findViewById(R.id.connect_btn);
 
         //Set title
-        if (titleId!=0){ title.setText(titleId); }
+        if (titleId!=0){
+            title.setText(titleId);
+        }else {
+            title.setText(titleTxt);
+        }
         //Set detail
         if (detailId!=0){
             detail.setText(detailId);

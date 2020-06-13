@@ -390,7 +390,7 @@ public class MainFragment extends Fragment {
                 @Override
                 public void onFailed(String error) {
                     Log.w(TAG, "OnFailed..."+error);
-                    Function.showNoResultDialog(activity, errorListener);
+                    Function.showDBErrorDialog(activity, error, errorListener);
                 }
             });
         }else {

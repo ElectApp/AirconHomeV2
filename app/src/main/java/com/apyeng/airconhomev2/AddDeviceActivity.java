@@ -424,8 +424,8 @@ public class AddDeviceActivity extends AppCompatActivity {
                             public void onFailed(String error) {
                                 Log.e(TAG, "Create home failed..."+error);
                                 //Show
-                                Function.showNoResultDialog(
-                                        AddDeviceActivity.this, errorListener);
+                                Function.showDBErrorDialog(
+                                        AddDeviceActivity.this, error, errorListener);
                             }
                         });
                     }else {

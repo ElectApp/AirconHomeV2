@@ -192,7 +192,7 @@ public class ModbusActivity extends AppCompatActivity {
                 @Override
                 public void onFailed(String error) {
                     Log.w(TAG, "OnFailed..."+error);
-                    Function.showNoResultDialog(ModbusActivity.this, errorListener);
+                    Function.showDBErrorDialog(ModbusActivity.this, error, errorListener);
                 }
             });
         }else {

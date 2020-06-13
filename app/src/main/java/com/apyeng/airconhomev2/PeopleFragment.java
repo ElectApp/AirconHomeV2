@@ -178,7 +178,7 @@ public class PeopleFragment extends Fragment {
 
                         @Override
                         public void onFailed(String error) {
-                            Function.showNoResultDialog(getActivity(), errorListener);
+                            Function.showDBErrorDialog(getActivity(), error, errorListener);
                         }
                     });
 
