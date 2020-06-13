@@ -60,7 +60,8 @@ public class Constant {
     //Result for PHP scripts
     public static final String SUCCESS = "success", CAUSE = "cause", ERROR = "error",
             NO_LIST = "no list", LOG_ERROR = "log_error", SUMMARY_ERROR = "summary_error",
-            SUMMARY_DATA = "summary_data", LOG_DATA = "log_data", DATA = "data";
+            SUMMARY_DATA = "summary_data", LOG_DATA = "log_data", DATA = "data",
+            FORCED_SIGN_OUT = "Forced sign out";
 
     public static int SIGN_IN_FLAG = 2, SIGN_OUT_FLAG = 3;
 

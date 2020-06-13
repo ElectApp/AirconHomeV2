@@ -411,11 +411,21 @@ public class HomeListActivity extends AppCompatActivity {
                 @Override
                 public void onFailed(String error) {
                     Log.e(TAG, "Failed: "+error);
-                    Function.showNoResultDialog(HomeListActivity.this, errorButtonListener);
+                    if(error.equals(Constant.FORCED_SIGN_OUT)){
+                        //Clear userId
+                        OnDevice onDevice = new OnDevice(HomeListActivity.this, OnDevice.USER_FILE);
+                        onDevice.saveUserId(0);
+                        //Close all the running activities and start SplashActivity
+                        //Thank: https://stackoverflow.com/questions/35510182/how-to-clear-previous-activities-on-a-button-click
+                        Intent intent = new Intent(HomeListActivity.this, SplashActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }else {
+                        Function.showDBErrorDialog(HomeListActivity.this, error, errorButtonListener);
+                    }
                     normalFlag = false;
                 }
             });
-
         }else {
             Function.showNoInternetDialog(this, errorButtonListener);
         }
@@ -453,7 +463,7 @@ public class HomeListActivity extends AppCompatActivity {
             @Override
             public void onFailed(String error) {
                 normalFlag = false;
-                Function.showNoResultDialog(HomeListActivity.this, errorButtonListener);
+                Function.showDBErrorDialog(HomeListActivity.this, error, errorButtonListener);
             }
         });
     }
