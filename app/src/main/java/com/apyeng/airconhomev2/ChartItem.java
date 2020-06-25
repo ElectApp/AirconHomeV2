@@ -9,8 +9,6 @@ public class ChartItem {
 
     public String time;
     public float values[];
-
-
     public double acValue, pvValue;
 
     public ChartItem(String time, double acValue, double pvValue){

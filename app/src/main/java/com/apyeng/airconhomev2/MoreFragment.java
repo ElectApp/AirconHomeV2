@@ -37,19 +37,25 @@ public class MoreFragment extends Fragment {
         //Set list
         List<SheetItem> menuItems = new ArrayList<>();
         menuItems.add(new SheetItem(R.drawable.tcp_icon, getString(R.string.modbus_tcp)));
+        menuItems.add(new SheetItem(R.drawable.graph_icon, getString(R.string.more_logging)));
         //Add to list
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         SheetItemAdapter adapter = new SheetItemAdapter(0, menuItems, new SheetItemAdapter.ItemListener() {
             @Override
             public void onItemClick(int id, int numberSelected, SheetItem itemSelected) {
+                Intent intent;
                 switch (numberSelected){
                     case 0: //Modbus
-                        Intent intent = new Intent(context, ModbusActivity.class);
-                        intent.putExtra(Constant.GROUP_ID, groupId);
-                        startActivity(intent);
+                        intent = new Intent(context, ModbusActivity.class);
                         break;
+                    case 1: //More Logging Data
+                        intent = new Intent(context, MoreLogDataActivity.class);
+                        break;
+                    default: return;
                 }
+                intent.putExtra(Constant.GROUP_ID, groupId);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

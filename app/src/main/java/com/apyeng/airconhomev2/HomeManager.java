@@ -526,8 +526,6 @@ public class HomeManager {
                                     String data = result.get(Constant.LOG_DATA).getAsString();
                                     JSONArray array = new JSONArray(data);
                                     int len = array.length();
-                                    //int len = 3;
-
                                     for (int i=0; i<len; i++){
                                         float values[] = new float[2];
                                         JSONObject object = array.getJSONObject(i);
@@ -564,6 +562,84 @@ public class HomeManager {
 
     interface OnLogDataListener{
         void onSuccess(float sumEachId[], float total, float maxValueAtTime, List<ChartItem> chartItems);
+        void onFailed(String error);
+    }
+
+    //Keep date format
+    public void readDeviceLogAdvanceData(final int groupId, int deviceId, String date,
+                                         final String[] key, final OnLogAdvanceDataListener listener){
+        //Set key list
+        String keyList = Arrays.toString(key);
+        keyList = keyList.replace("[", "");
+        keyList = keyList.replace("]", "");
+        Log.w(TAG, "read logging advance data of device ID: "+deviceId+" At "+date+" By "+keyList);
+        Function.showLoadingDialog(activity);
+        //Do
+        Ion.with(context)
+                .load(Constant.DEVICE_LOG_ADVANCE_DATA_URL)
+                .setBodyParameter(Constant.GROUP_ID, String.valueOf(groupId))
+                .setBodyParameter(Constant.DEVICE_ID, String.valueOf(deviceId))
+                .setBodyParameter(Constant.DATE, date)
+                .setBodyParameter(Constant.KEY_LIST, keyList)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        Function.dismissLoadingDialog(activity);
+                        //Check data
+                        Log.e(TAG, "Error: "+e);
+                        //Log.w(TAG, "Result: "+result);
+                        //Check result
+                        if (result!=null){
+                            if (result.has(Constant.ERROR)){
+                                //Error
+                                String err = result.get(Constant.ERROR).getAsString();
+                                listener.onFailed(err);
+                            }else {
+                                //int group = result.get(Constant.GROUP_ID).getAsInt();
+                                //int device = result.get(Constant.DEVICE_ID).getAsInt();
+                                List<ChartItem> items = new ArrayList<>();
+                                try {
+                                    // Can't use
+                                    // JsonArray jsonArray = result.get(Constant.LOG_DATA).getAsJsonArray();
+                                    // Due to result.get(Constant.LOG_DATA) is send format EX. below
+                                    // "data":"[{\"device_id\":\"6\",\"pv_wh\":\"0\"},{\"device_id\":\"7\",\"pv_wh\":\"7916\"}]"}
+                                    // It is not json google format
+                                    String data = result.get(Constant.LOG_DATA).getAsString();
+                                    JSONArray array = new JSONArray(data);
+                                    final int len = array.length();
+                                    final int keyLen = key.length;
+                                    for (int i=0; i<len; i++){
+                                        float values[] = new float[keyLen];
+                                        JSONObject object = array.getJSONObject(i);
+                                        String time = object.getString(Constant.TIME); //Input: hh:mm:ss
+                                        //Set cut only hh:mm
+                                        time = time.substring(0, time.length()-3);
+                                        //Data
+                                        for (int x=0; x<keyLen; x++){
+                                            values[x] = (float) object.getDouble(key[x]);
+                                            Log.w(TAG, time+" "+Arrays.toString(values));
+                                        }
+                                        //Add list
+                                        items.add(new ChartItem(time, values));
+                                    }
+                                } catch (JSONException e1) {
+                                    e1.printStackTrace();
+                                }
+                                //Callback
+                                listener.onSuccess(items);
+                            }
+                        }else if (e!=null){
+                            listener.onFailed(e.getMessage());
+                        }else {
+                            listener.onFailed(context.getString(R.string.no_result));
+                        }
+                    }
+                });
+    }
+
+    interface OnLogAdvanceDataListener{
+        void onSuccess(List<ChartItem> chartItems);
         void onFailed(String error);
     }
 

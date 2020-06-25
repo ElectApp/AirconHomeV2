@@ -2,12 +2,18 @@ package com.apyeng.airconhomev2;
 
 public class SheetItem {
 
-    private int iconId;
+    private int iconId, itemId;
     private String name;
 
     public SheetItem(int iconId, String name){
         this.iconId = iconId;
         this.name = name;
+    }
+
+    public SheetItem(int iconId, String name, int itemId){
+        this.iconId = iconId;
+        this.name = name;
+        this.itemId = itemId;
     }
 
     public void setIconId(int iconId) {
@@ -18,6 +24,10 @@ public class SheetItem {
         this.name = name;
     }
 
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
     public int getIconId() {
         return iconId;
     }
@@ -26,4 +36,7 @@ public class SheetItem {
         return name;
     }
 
+    public int getItemId() {
+        return itemId;
+    }
 }

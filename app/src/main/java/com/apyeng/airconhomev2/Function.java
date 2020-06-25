@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
@@ -42,17 +43,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.apyeng.airconhomev2.Interfaces.StringCallback;
+import com.github.mikephil.charting.data.Entry;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.ByteArrayOutputStream;
+import java.security.KeyStore;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 import static android.content.Context.WIFI_SERVICE;
 import static com.android.volley.Request.Method.GET;
@@ -580,6 +585,20 @@ public class Function {
             case 3: return R.drawable.wifi_level3_icon;
             default: return R.drawable.wifi_level4_icon;
         }
+    }
+
+    public static int getRandomColor(){
+        Random random = new Random();
+        return Color.argb(255, random.nextInt(256),
+                random.nextInt(256), random.nextInt(256));
+    }
+
+    public static float getAvg(ArrayList<Entry> entries){
+        float y = 0.0f;
+        for (Entry t : entries){
+            y += t.getY();
+        }
+        return y/entries.size();
     }
 
 

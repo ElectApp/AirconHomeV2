@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <paths xmlns:android="http://schemas.android.com/apk/res/android">
+        <!--Thank: https://stackoverflow.com/a/42516202-->
+        <!--<files-path/> = Context.getFilesDir()-->
+        <!--<cache-path/> = Context.getCacheDir()-->
+        <!--<external-path/> = Environment.getExternalStorageDirectory()-->
+        <!--<external-files-path/> = Context.getExternalFilesDir(String)-->
+        <!--<external-cache-path/> = Context.getExternalCacheDir()-->
+        <!--<external-media-path/>= Context.getExternalMediaDirs()-->
         <cache-path name="shared_images" path="images/"/>
+        <external-path name="shared_doc" path="." />
     </paths>
 </resources>

@@ -229,6 +229,7 @@
 
     <!-- MoreFragment -->
     <string name="modbus_tcp">Modbus TCP/IP Server</string>
+    <string name="more_logging">More Logging Data</string>
 
     <!-- ModbusActivity -->
     <string name="tcp_con">TCP Connection</string>
@@ -257,5 +258,11 @@
     <string name="forget_network_details">Do you want to forget this network?</string>
     <string name="cancel">Cancel</string>
     <string name="forget">Forget</string>
+
+    <!-- MoreLogDataActivity -->
+    <string name="device">Device</string>
+    <string name="date">Date</string>
+    <string name="no_data">No Data found</string>
+    <string name="no_sel">No items selected. Please click to select an item.</string>
 
 </resources>

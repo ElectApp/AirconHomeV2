@@ -258,7 +258,7 @@ public class PeopleFragment extends Fragment {
             image.compress(Bitmap.CompressFormat.PNG, 90, stream);
             stream.flush();
             stream.close();
-            uri = FileProvider.getUriForFile(context, "com.apyeng.fileprovider", file);
+            uri = FileProvider.getUriForFile(context, Constant.MY_FILE_PROVIDER, file);
 
         } catch (IOException e) {
             Log.e(TAG, "IOException while trying to write file for sharing: " + e.getMessage());

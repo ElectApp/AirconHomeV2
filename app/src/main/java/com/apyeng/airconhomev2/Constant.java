@@ -1,8 +1,10 @@
 package com.apyeng.airconhomev2;
 
 import android.Manifest;
+import android.os.Environment;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -26,6 +28,7 @@ public class Constant {
     public static final String UPDATE_TIME_USER_GROUP_URL = HOST + "update-time-user-group.php";
     public static final String DAILY_LOG_DATA = HOST + "daily-log-data.php";
     public static final String DEVICE_LOG_DATA_URL = HOST + "device-log-data.php";
+    public static final String DEVICE_LOG_ADVANCE_DATA_URL = HOST + "device-log-advance-data.php";
     public static final String MONTHLY_LOG_DATA = HOST + "monthly-log-data.php";
     public static final String DEVICE_FIRMWARE = HOST + "device-firmware.php";
     public static final String SEND_RESET_PASSWORD_EMAIL = HOST + "send-email-reset-password.php";
@@ -48,14 +51,16 @@ public class Constant {
         STATUS = "status", USER_ID = "user_id", GROUP_ID = "group_id", VERIFY_CODE = "verification_code",
         NAME = "name", LOCATION = "location", DEVICE_ID = "device_id", PROFILE_IMG = "profile_img",
         ACTUAL_NAME = "actual_name", NICKNAME = "nickname", REGISTERED = "registered", FILENAME = "filename",
-            DETAILS = "details", MD5 = "md5";
+            DETAILS = "details", MD5 = "md5", KEY_LIST = "key_list";
 
     //Other key on PHP scripts
     public static final String LANGUAGE = "language", GROUP_ID_LIST = "group_id_list",
             SIGN_OUT = "sign-out", START_POINT = "start_point", TIME = "time", AC_POWER = "ac_power",
             PV_POWER = "pv_power", DATE = "date", START_DATE = "start-date", END_DATE = "end-date",
             PV_WH = "pv_wh", START_MONTH = "start-month", END_MONTH = "end-month",
-            SQL_MESSAGE = "sql-message";
+            SQL_MESSAGE = "sql-message", TRIP_TYPE = "trip_type", ROOM_TEMP = "room_temp",
+            AC_VOLTAGE = "ac_voltage", AC_CURRENT = "ac_current", AC_WH = "ac_wh",
+            PV_VOLTAGE = "pv_voltage", PV_CURRENT = "pv_current";
 
     //Result for PHP scripts
     public static final String SUCCESS = "success", CAUSE = "cause", ERROR = "error",
@@ -100,8 +105,17 @@ public class Constant {
     public static final SimpleDateFormat REGISTER_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     public static final DateFormat MONTH_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
+    public static final DecimalFormat ONE_POINT = new DecimalFormat("0.0");
+    public static final DecimalFormat NONE_POINT = new DecimalFormat("0");
+
+    //File
+    public static final String MY_FILE_PROVIDER = "com.apyeng.fileprovider";
+    public static final String MAIN_FILE_PATH = Environment.getExternalStorageDirectory()+"/Aircon Home/";
+
 
     private static final int NUM_DAY = 30, NUM_WEEK = 4, NUM_MONTH = 12, NUM_YEAR = 5;
+
+
 
 
 

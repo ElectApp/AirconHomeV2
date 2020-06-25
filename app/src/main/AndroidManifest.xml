@@ -76,7 +76,8 @@
             android:name=".RenameACActivity"
             android:windowSoftInputMode="adjustResize" /> <!-- Resize window when keyboard visible -->
 
-        <activity android:name=".ModbusActivity"></activity>
+        <activity android:name=".ModbusActivity" />
+        <activity android:name=".MoreLogDataActivity"></activity>
     </application>
 
 </manifest>

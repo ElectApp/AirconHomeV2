@@ -26,6 +26,8 @@
     <color name="colorTrans">@android:color/transparent</color>
     <color name="colorWhiteTrans">#ceffffff</color>
     <color name="colorBlackTrans">#28000000</color>
+    <color name="colorAccentTrans">#4bf54819</color>
+    <color name="colorPrimaryTrans">#282f80ed</color>
 
     <color name="colorMainBackgroundTop">#ece9e6</color>
 
