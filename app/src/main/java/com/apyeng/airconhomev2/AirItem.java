@@ -11,6 +11,7 @@ public class AirItem implements Parcelable{
     private String nickname;
     private boolean online;
     private Indoor indoor;
+    private String error;
 
     public AirItem(){
 
@@ -32,6 +33,7 @@ public class AirItem implements Parcelable{
         actualName = in.readString();
         nickname = in.readString();
         online = in.readByte() != 0;
+        error = in.readString();
     }
 
     public static final Creator<AirItem> CREATOR = new Creator<AirItem>() {
@@ -70,6 +72,10 @@ public class AirItem implements Parcelable{
         return online;
     }
 
+    public void setError(String error) {
+        this.error = error;
+    }
+
     public int getDeviceId() {
         return deviceId;
     }
@@ -86,6 +92,10 @@ public class AirItem implements Parcelable{
         return indoor;
     }
 
+    public String getError() {
+        return error;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -97,5 +107,6 @@ public class AirItem implements Parcelable{
         parcel.writeString(actualName);
         parcel.writeString(nickname);
         parcel.writeByte((byte) (online ? 1 : 0));
+        parcel.writeString(error);
     }
 }

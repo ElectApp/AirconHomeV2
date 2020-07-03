@@ -64,7 +64,7 @@
                             android:id="@+id/saving_value"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/item_value"
-                            android:maxLines="1"
+                            android:maxLines="2"
                             android:textColor="@color/colorGreen3"
                             app:autoSizeTextType="uniform"
                             android:text="0.00 W"/>

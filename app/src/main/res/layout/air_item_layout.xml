@@ -49,8 +49,8 @@
                 android:id="@+id/set_point_lay"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/air_icon_s"
-                android:orientation="horizontal"
                 android:gravity="center"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/speed_icon"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -61,21 +61,21 @@
                     android:id="@+id/set_point_value"
                     android:layout_width="54dp"
                     android:layout_height="match_parent"
-                    android:includeFontPadding="false"
                     android:gravity="center"
-                    android:text="24.5"
+                    android:includeFontPadding="false"
                     android:maxLines="1"
+                    android:text="24.5"
                     android:textColor="@color/colorPrimary"
                     app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:includeFontPadding="false"
                     android:gravity="top"
+                    android:includeFontPadding="false"
                     android:text="@string/celsius_degree"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -89,6 +89,20 @@
                 android:src="@drawable/fan_speed_2_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/ac_error"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="Show error details"
+                android:textColor="@color/colorRed"
+                android:maxLines="3"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>

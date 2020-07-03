@@ -44,6 +44,8 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
         //Set basic data
         String name = data.getNickname();
         holder.name.setText(name!=null? name : "");
+        //Error
+        String err = data.getError();
         //Set indoor value to item
         Indoor indoor = data.getIndoor();
         if (indoor!=null){
@@ -74,6 +76,13 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
             holder.setSpeedIcon(OFF_MODE);
             holder.setSetPoint(OFF_MODE);
             holder.warningIcon.setVisibility(View.GONE);
+            //Error?
+            if (err!=null){
+                holder.error.setText(err);
+                holder.error.setVisibility(View.VISIBLE);
+            }else {
+                holder.error.setVisibility(View.GONE);
+            }
             //Invisible room widget
             holder.roomWidget.setVisibility(View.GONE);
         }
@@ -90,6 +99,7 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
         private LinearLayout setPointLay;
         private TextView setPointValue;
         private TextView name;
+        private TextView error;
         private ImageView modeIcon, speedIcon, warningIcon;
         private ImageTextButtonWidget roomWidget;
         private View powerLine;
@@ -105,6 +115,7 @@ public class AirItemAdapter extends RecyclerView.Adapter<AirItemAdapter.ViewHold
             warningIcon = v.findViewById(R.id.warning_icon);
             roomWidget = v.findViewById(R.id.room_temp);
             powerLine = v.findViewById(R.id.power_line);
+            error = v.findViewById(R.id.ac_error);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override

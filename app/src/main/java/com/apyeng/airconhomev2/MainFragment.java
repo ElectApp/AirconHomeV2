@@ -303,14 +303,19 @@ public class MainFragment extends Fragment {
                         int p = airItemAdapter.getPositionOf(device);
                         if (p>-1){
                             //Found item
+                            AirItem old = airItemAdapter.getAirItem(p);
+                            String err = null; //MB Error
                             Indoor indoor = null; //is offline
                             //Message same request MB_INFO tag (Single Control)
                             if (v.length>=Indoor.DATA_SIZE(Indoor.MB_INFO)){
                                 Time on = new Time(v[2], v[3]);
                                 Time off = new Time(v[4], v[5]);
                                 indoor = new Indoor(v[0], v[1], on, off, v[6], v[7]);
+                            }else {
+                                err = message.toString();
+                                if (err.endsWith(",")){ err = err.substring(0, err.length()-1); }
                             }
-                            AirItem old = airItemAdapter.getAirItem(p);
+                            old.setError(err);
                             old.setIndoor(indoor);
                             airItemAdapter.setItems(p, old);
                             Log.w(TAG, "AirItem ID "+device+" is updated "+old.isOnline());
@@ -402,13 +407,15 @@ public class MainFragment extends Fragment {
             = new AppErrorDialog.OnClickActionButtonListener() {
         @Override
         public void onClick(View view, int titleId, int buttonId) {
+            /*
             switch (titleId){
                 case R.string.no_result:
                 case R.string.no_internet:
                     tryReadDeviceDetail();
                     break;
             }
-
+            */
+            tryReadDeviceDetail();
         }
     };
 

@@ -530,7 +530,7 @@ public class HomeManager {
                                         float values[] = new float[2];
                                         JSONObject object = array.getJSONObject(i);
                                         String time = object.getString(Constant.TIME); //Input: hh:mm:ss
-                                        values[0] = (float) object.getDouble(Constant.AC_POWER);
+                                        values[0] = (float) object.getDouble(Constant.COMP_IN_POWER);
                                         values[1] = (float) object.getDouble(Constant.PV_POWER);
                                         //Log.w(TAG, "Time: "+time+", AC: "+values[0]+", PV: "+values[1]);
                                         //Set cut only hh:mm
