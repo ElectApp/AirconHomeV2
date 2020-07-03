@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.apyeng.airconhomev2.Constant;
 import com.apyeng.airconhomev2.Function;
 import com.apyeng.airconhomev2.LockableNestedScrollView;
 import com.apyeng.airconhomev2.MyValueFormatter;
@@ -64,7 +65,7 @@ public class GraphLogItemAdapter extends RecyclerView.Adapter<GraphLogItemAdapte
         viewHolder.setIconImg(logItem.checked? R.drawable.check_icon:logItem.iconId);
         viewHolder.titleTv.setText(logItem.title);
         viewHolder.detailsTv.setText(logItem.details);
-        viewHolder.setChart(logItem.title, logItem.unit, logItem.graphLabel, logItem.graphData);
+        viewHolder.setChart(logItem.title, logItem.unit, logItem.graphLabel, logItem.graphData, logItem.min);
     }
 
     @Override
@@ -122,7 +123,8 @@ public class GraphLogItemAdapter extends RecyclerView.Adapter<GraphLogItemAdapte
             isShowValue = show;
         }
 
-        private void setChart(String chartTitle, String unit, final ArrayList<String> graphLabel, final ArrayList<Entry> graphData){
+        private void setChart(String chartTitle, String unit, final ArrayList<String> graphLabel,
+                              final ArrayList<Entry> graphData, final float min){
             if (chartTitle==null || unit==null || graphLabel==null || graphData==null){ return; }
             //=================== Initial ====================//
             //Set property
@@ -137,7 +139,7 @@ public class GraphLogItemAdapter extends RecyclerView.Adapter<GraphLogItemAdapte
             leftAxis.setDrawGridLines(true);
             leftAxis.enableGridDashedLine(10f, 10f, 10f);
             leftAxis.setValueFormatter(new MyValueFormatter(" "+unit, 0));
-            leftAxis.setAxisMinimum(0f); //Start from 0
+            leftAxis.setAxisMinimum(min<0f? min:0f); //Start point
             //Y right Axis
             YAxis rightAxis = chart.getAxisRight();
             rightAxis.setEnabled(false); //Not use

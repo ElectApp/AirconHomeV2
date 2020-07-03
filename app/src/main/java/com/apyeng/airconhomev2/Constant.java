@@ -60,7 +60,13 @@ public class Constant {
             PV_WH = "pv_wh", START_MONTH = "start-month", END_MONTH = "end-month",
             SQL_MESSAGE = "sql-message", TRIP_TYPE = "trip_type", ROOM_TEMP = "room_temp",
             AC_VOLTAGE = "ac_voltage", AC_CURRENT = "ac_current", AC_WH = "ac_wh",
-            PV_VOLTAGE = "pv_voltage", PV_CURRENT = "pv_current";
+            PV_VOLTAGE = "pv_voltage", PV_CURRENT = "pv_current", SET_POINT = "set_point",
+            STALL = "stall", OPERATING_FREQ = "operating_freq", PFC_CURRENT = "pfc_current",
+            PFC_TEMP = "pfc_temp", HEAT_SINK_TEMP = "heat_sink_temp", AMBIENT_TEMP = "ambient_temp",
+            COMP_CURRENT = "comp_current", COMP_VOLTAGE = "comp_voltage", DC_BUS_VOLTAGE = "dc_bus_voltage",
+            COMP_IN_POWER = "comp_in_power", EXV_POSITION = "exv_position", BLDC_FAN1 = "bldc_fan1",
+            BLDC_FAN2 = "bldc_fan2", DISCHARGE_TEMP = "discharge_temp", SUCTION_TEMP = "suction_temp",
+            CONDENSER_TEMP = "condenser_temp", PV_TOTAL_KWH = "pv_total_kwh";
 
     //Result for PHP scripts
     public static final String SUCCESS = "success", CAUSE = "cause", ERROR = "error",

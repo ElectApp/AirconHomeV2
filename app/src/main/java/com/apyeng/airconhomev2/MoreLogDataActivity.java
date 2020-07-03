@@ -9,6 +9,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,20 +43,17 @@ public class MoreLogDataActivity extends AppCompatActivity {
     private ArrayList<SheetItem> devicesItems;
     private LinearLayout deviceLay;
     private TextView deviceTxt;
-    //Date
+    //Data
     private Calendar cal;
-    private TextView dateTxt;
+    private TextView dateTxt, selectedTxt;
     private final static SimpleDateFormat M_DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
     private final static SimpleDateFormat M2_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-    private final static String[] KEY_DATA = { Constant.TRIP_TYPE, Constant.ROOM_TEMP,
-            Constant.AC_VOLTAGE, Constant.AC_CURRENT, Constant.AC_POWER,
-            Constant.PV_VOLTAGE, Constant.PV_CURRENT, Constant.PV_POWER, Constant.PV_WH };
-    private static final String[] KEY_POINT = { "0", "0.0",
-            "0", "0.0", "0",
-            "0", "0.0", "0", "0" };
+    private static String[] KEY_DATA, KEY_POINT;
     private GraphLogItemAdapter adapter;
     private List<GraphLogItem> items;
     private RecyclerView logRv;
+    private int countSelected;
+    private SwipeRefreshLayout swipeLay;
     //Export CSV
     private ImageView expIcon;
     private List<ChartItem> allChart;
@@ -74,6 +74,8 @@ public class MoreLogDataActivity extends AppCompatActivity {
         groupId = getIntent().getIntExtra(Constant.GROUP_ID, 0);
 
         //Layout
+        swipeLay = findViewById(R.id.log_swipe);
+        selectedTxt = findViewById(R.id.count_tv);
         deviceLay = findViewById(R.id.device_selected_lay);
         deviceTxt = findViewById(R.id.tv_device);
         expIcon = findViewById(R.id.exp_icon);
@@ -89,6 +91,17 @@ public class MoreLogDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        //================ Refresh ==============//
+        swipeLay.setEnabled(true);
+        swipeLay.setColorSchemeResources(R.color.colorPrimary);
+        swipeLay.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.w(TAG, "Refresh...");
+                loadData();
             }
         });
 
@@ -142,28 +155,56 @@ public class MoreLogDataActivity extends AppCompatActivity {
         //Initial
         LinearLayoutManager rvManager = new LinearLayoutManager(this);
         items = new ArrayList<>();
-        items.add(new GraphLogItem(false, R.drawable.ic_error, "Trip Type",
-                "Indoor or Outdoor's fault", "", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_temp, "Room Temperature",
-                "It is measured by sensor of the return tube.", "\u2103", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_comp, "Compressor Voltage",
-                "It is the output voltage of outdoor controller.", "V", null, null));
-//        items.add(new GraphLogItem(false, R.drawable.ic_comp, "Compressor Current",
-//                "It is the output current of outdoor controller.", "A", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_comp, "Inverter Input Current",
-                "It is the input current of outdoor controller.", "A", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_comp, "Compressor Power",
-                "It is the output power of outdoor controller.", "W", null, null));
-//        items.add(new GraphLogItem(false, R.drawable.ic_comp, "Compressor Energy",
-//                "It is the output energy of outdoor controller.", "Wh", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_pv, "PV Voltage",
-                "It is the output voltage of solar panel (PV).", "V", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_pv, "PV Current",
-                "It is the output current of solar panel (PV).", "A", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_pv, "PV Power",
-                "It is the output power of solar panel (PV).", "W", null, null));
-        items.add(new GraphLogItem(false, R.drawable.ic_pv, "PV Energy",
-                "It is the output energy of solar panel (PV).", "Wh", null, null));
+        items.add(new GraphLogItem(Constant.SET_POINT, false, R.drawable.ic_temp, "Set Point Temperature",
+                "Command by user", "0.0", "\u2103", null, null));
+        items.add(new GraphLogItem(Constant.ROOM_TEMP, false, R.drawable.ic_temp, "Room Temperature",
+                "It is measured by sensor of the return tube.", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.STATUS, false, R.drawable.ic_machine, "Indoor Status",
+                "Real status of Indoor", "0", "",null, null));
+        items.add(new GraphLogItem(Constant.STALL, false, R.drawable.ic_machine, "Stall Prevention",
+                "Stall prevention of Outdoor", "0","", null, null));
+        items.add(new GraphLogItem(Constant.TRIP_TYPE, false, R.drawable.ic_error, "Trip Type",
+                "Indoor or Outdoor's fault", "0", "",null, null));
+        items.add(new GraphLogItem(Constant.PFC_CURRENT, false, R.drawable.ic_pcb, "Invert Input Current",
+                "", "0.0","A", null, null));
+        items.add(new GraphLogItem(Constant.DC_BUS_VOLTAGE, false, R.drawable.ic_pcb, "DC Bus Voltage",
+                "", "0","V", null, null));
+        items.add(new GraphLogItem(Constant.PFC_TEMP, false, R.drawable.ic_temp, "PFC Temperature",
+                "", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.HEAT_SINK_TEMP, false, R.drawable.ic_temp, "Heat Sink Temperature",
+                "", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.OPERATING_FREQ, false, R.drawable.ic_comp, "Compressor Speed",
+                "", "0.00","Hz", null, null));
+        items.add(new GraphLogItem(Constant.COMP_VOLTAGE, false, R.drawable.ic_comp, "Compressor Voltage",
+                "", "0","V", null, null));
+        items.add(new GraphLogItem(Constant.COMP_CURRENT, false, R.drawable.ic_comp, "Compressor Current",
+                "", "0.0","A", null, null));
+        items.add(new GraphLogItem(Constant.COMP_IN_POWER, false, R.drawable.ic_comp, "Compressor Input Power",
+                "It is the output power of outdoor controller.", "0","W", null, null));
+        items.add(new GraphLogItem(Constant.EXV_POSITION, false, R.drawable.ic_machine, "EXV Position",
+                "", "0","", null, null));
+        items.add(new GraphLogItem(Constant.BLDC_FAN1, false, R.drawable.ic_machine, "BLDC Fan 1",
+                "", "0","rpm", null, null));
+        items.add(new GraphLogItem(Constant.BLDC_FAN2, false, R.drawable.ic_machine, "BLDC Fan 2",
+                "", "0","rpm", null, null));
+        items.add(new GraphLogItem(Constant.DISCHARGE_TEMP, false, R.drawable.ic_temp, "Discharge Temperature",
+                "", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.SUCTION_TEMP, false, R.drawable.ic_temp, "Suction Temperature",
+                "", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.CONDENSER_TEMP, false, R.drawable.ic_temp, "Condenser Temperature",
+                "", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.AMBIENT_TEMP, false, R.drawable.ic_temp, "Ambient Temperature",
+                "", "0.0","\u2103", null, null));
+        items.add(new GraphLogItem(Constant.PV_VOLTAGE, false, R.drawable.ic_pv, "PV Voltage",
+                "It is the output voltage of solar panel (PV).", "0","V", null, null));
+        items.add(new GraphLogItem(Constant.PV_CURRENT, false, R.drawable.ic_pv, "PV Current",
+                "It is the output current of solar panel (PV).", "0.0","A", null, null));
+        items.add(new GraphLogItem(Constant.PV_POWER, false, R.drawable.ic_pv, "PV Power",
+                "It is the output power of solar panel (PV).", "0.0","W", null, null));
+        items.add(new GraphLogItem(Constant.PV_WH, false, R.drawable.ic_pv, "PV Energy Today",
+                "It is the output energy of solar panel (PV).", "0","Wh", null, null));
+        items.add(new GraphLogItem(Constant.PV_TOTAL_KWH, false, R.drawable.ic_pv, "PV Total Energy",
+                "It is the output energy of solar panel (PV).", "0","kWh", null, null));
         adapter = new GraphLogItemAdapter(this, items);
         adapter.setOnItemClickListener(new GraphLogItemAdapter.OnItemClickListener() {
             @Override
@@ -173,12 +214,26 @@ public class MoreLogDataActivity extends AppCompatActivity {
                 item.checked = !item.checked;
                 items.set(p, item);
                 adapter.notifyItemChanged(p);
+                //Show total of item selected
+                setSelectedTxt(item.checked? 1:-1);
             }
         });
         logRv.setLayoutManager(rvManager);
         logRv.setAdapter(adapter);
+        //Initial counter
+        setSelectedTxt(0);
+        //KEY DATA and POINT
+        GraphLogItem logItem;
+        KEY_DATA = new String[items.size()];
+        KEY_POINT = new String[items.size()];
+        for (int k=0; k<items.size(); k++){
+            logItem = items.get(k);
+            KEY_DATA[k] = logItem.logKey;
+            KEY_POINT[k] = logItem.format;
+        }
         //Load data
         tryReadDeviceDetail();
+
     }
 
     @Override
@@ -197,6 +252,12 @@ public class MoreLogDataActivity extends AppCompatActivity {
         for (int i=0; i<sectionView.length; i++){
             sectionView[i].setVisibility(i==n? View.VISIBLE : View.GONE);
         }
+    }
+
+    private void setSelectedTxt(int add){
+        countSelected += add;
+        selectedTxt.setText(String.valueOf(countSelected));
+        selectedTxt.setVisibility(countSelected>0? View.VISIBLE:View.INVISIBLE);
     }
 
     private void tryReadDeviceDetail(){
@@ -302,80 +363,44 @@ public class MoreLogDataActivity extends AppCompatActivity {
                 Constant.DATE_FORMAT.format(cal.getTime()), KEY_DATA, new HomeManager.OnLogAdvanceDataListener() {
                     @Override
                     public void onSuccess(List<ChartItem> chartItems) {
+                        //Log.w(TAG, "Chart list..."+chartItems.size());
+
                         //Prepare data to set chart
-                        ArrayList<Entry> d1 = new ArrayList<>();
-                        ArrayList<Entry> d2 = new ArrayList<>();
-                        ArrayList<Entry> d3 = new ArrayList<>();
-                        ArrayList<Entry> d4 = new ArrayList<>();
-                        ArrayList<Entry> d5 = new ArrayList<>();
-                        ArrayList<Entry> d6 = new ArrayList<>();
-                        ArrayList<Entry> d7 = new ArrayList<>();
-                        ArrayList<Entry> d8 = new ArrayList<>();
-                        ArrayList<Entry> d9 = new ArrayList<>();
+                        ArrayList<Entry>[] dAll = new ArrayList[items.size()];
                         ArrayList<String> time = new ArrayList<>();
+                        float min[] = new float[items.size()];
                         for (int i=0; i<chartItems.size(); i++){
                             ChartItem item = chartItems.get(i);
-                            d1.add(new Entry(i, item.values[0]));
-                            d2.add(new Entry(i, item.values[1]));
-                            d3.add(new Entry(i, item.values[2]));
-                            d4.add(new Entry(i, item.values[3]));
-                            d5.add(new Entry(i, item.values[4]));
-                            d6.add(new Entry(i, item.values[5]));
-                            d7.add(new Entry(i, item.values[6]));
-                            d8.add(new Entry(i, item.values[7]));
-                            d9.add(new Entry(i, item.values[8]));
+                            for (int k=0; k<dAll.length; k++){
+                                if (dAll[k]==null){ dAll[k] = new ArrayList<>(); }
+                                dAll[k].add(new Entry(i, item.values[k]));
+                                //Found min value
+                                if (item.values[k]<min[k]){ min[k] = item.values[k]; }
+                            }
                             time.add(i, item.time);
                         }
-                        //Show data
-                        //Trip type
-                        GraphLogItem g1 = items.get(0);
-                        g1.details = Constant.NONE_POINT.format(d1.get(d1.size()-1).getY())+" "+g1.unit;
-                        g1.graphLabel = time;
-                        g1.graphData = d1;
-                        //Room temp
-                        GraphLogItem g2 = items.get(1);
-                        g2.details = Constant.ONE_POINT.format(d2.get(d2.size()-1).getY())+" "+g2.unit;
-                        g2.graphLabel = time;
-                        g2.graphData = d2;
-                        //Comp V
-                        GraphLogItem g3 = items.get(2);
-                        g3.details = Constant.NONE_POINT.format(d3.get(d3.size()-1).getY())+" "+g3.unit;
-                        g3.graphLabel = time;
-                        g3.graphData = d3;
-                        //Comp A
-                        GraphLogItem g4 = items.get(3);
-                        g4.details = Constant.ONE_POINT.format(d4.get(d4.size()-1).getY())+" "+g4.unit;
-                        g4.graphLabel = time;
-                        g4.graphData = d4;
-                        //Comp W
-                        GraphLogItem g5 = items.get(4);
-                        g5.details = Constant.NONE_POINT.format(d5.get(d5.size()-1).getY())+" "+g5.unit;
-                        g5.graphLabel = time;
-                        g5.graphData = d5;
-                        //PV V
-                        GraphLogItem g6 = items.get(5);
-                        g6.details = Constant.NONE_POINT.format(d6.get(d6.size()-1).getY())+" "+g6.unit;
-                        g6.graphLabel = time;
-                        g6.graphData = d6;
-                        //PV A
-                        GraphLogItem g7 = items.get(6);
-                        g7.details = Constant.ONE_POINT.format(d7.get(d7.size()-1).getY())+" "+g7.unit;
-                        g7.graphLabel = time;
-                        g7.graphData = d7;
-                        //PV W
-                        GraphLogItem g8 = items.get(7);
-                        g8.details = Constant.NONE_POINT.format(d8.get(d8.size()-1).getY())+" "+g8.unit;
-                        g8.graphLabel = time;
-                        g8.graphData = d8;
-                        //PV Wh
-                        GraphLogItem g9 = items.get(8);
-                        g9.details = Constant.NONE_POINT.format(d9.get(d9.size()-1).getY())+" "+g9.unit;
-                        g9.graphLabel = time;
-                        g9.graphData = d9;
+
+                        //Show Data
+                        for (int w=0; w<items.size(); w++){
+                            GraphLogItem g = items.get(w);
+                            float v = dAll[w].get(dAll[w].size()-1).getY();
+                            if (g.logKey.equals(Constant.STATUS)||g.logKey.equals(Constant.STALL)){
+                                g.details = Function.getStringValueFormat((int)v, Function.BINARY_FORM);
+                            }else {
+                                g.details = new DecimalFormat(KEY_POINT[w]).format(v)+" "+g.unit;
+                            }
+                            g.graphLabel = time;
+                            g.graphData = dAll[w];
+                            g.min = min[w];
+                            Log.w(TAG, "Updated chart...name = "+g.title+", min = "+g.min);
+                        }
+
                         //Update adapter and show list
                         adapter.notifyDataSetChanged();
                         showContent(CONTENT);
                         logRv.setVisibility(View.VISIBLE);
+                        //Clear
+                        if (swipeLay.isRefreshing()){ swipeLay.setRefreshing(false); }
                         //Save
                         allChart.clear();
                         allChart.addAll(chartItems);

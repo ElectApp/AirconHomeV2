@@ -25,35 +25,68 @@
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
-            <ImageView
-                android:id="@+id/back_icon"
-                android:layout_width="@dimen/g_ic_s"
-                android:layout_height="@dimen/g_ic_s"
-                android:padding="@dimen/g_ic_p"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_arrow_back"
-                android:contentDescription="@string/app_name"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/title_toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:text="@string/more_logging" />
+                <ImageView
+                    android:id="@+id/back_icon"
+                    android:layout_width="@dimen/g_ic_s"
+                    android:layout_height="@dimen/g_ic_s"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center_vertical"
+                    android:clickable="true"
+                    android:contentDescription="@string/app_name"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/g_ic_p"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/exp_icon"
-                android:layout_width="@dimen/g_ic_s"
-                android:layout_height="@dimen/g_ic_s"
-                android:src="@drawable/export_icon"
-                android:padding="@dimen/g_ic_p"
-                android:layout_gravity="end"
-                android:gravity="center_vertical"
-                android:foreground="?attr/selectableItemBackground"/>
+                <TextView
+                    android:id="@+id/title_toolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/more_logging"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/count_tv"
+                    app:layout_constraintStart_toEndOf="@+id/back_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/count_tv"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_shape_1"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="12"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/exp_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/exp_icon"
+                    android:layout_width="@dimen/g_ic_s"
+                    android:layout_height="@dimen/g_ic_s"
+                    android:layout_gravity="end"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/g_ic_p"
+                    android:src="@drawable/export_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
 
         </android.support.v7.widget.Toolbar>
 
@@ -63,95 +96,103 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/container"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/log_swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/device_selected_lay"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/enter_background_1"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
-                        <TextView
-                            android:id="@+id/tv_device"
-                            android:layout_weight="0.9"
+                        <LinearLayout
+                            android:id="@+id/device_selected_lay"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorTrans"
-                            android:fontFamily="@font/muli_extra_bold"
-                            android:singleLine="true"
-                            android:textColor="@color/colorPrimary"
-                            android:text="@string/device"/>
+                            android:layout_weight="1"
+                            android:background="@drawable/enter_background_1"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/select_icon"
-                            android:layout_weight="0.1"
-                            android:layout_width="0dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/down_icon"
-                            android:layout_gravity="center_vertical"/>
+                            <TextView
+                                android:id="@+id/tv_device"
+                                android:layout_weight="0.9"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorTrans"
+                                android:fontFamily="@font/muli_extra_bold"
+                                android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/device"/>
 
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/select_icon"
+                                android:layout_weight="0.1"
+                                android:layout_width="0dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/down_icon"
+                                android:layout_gravity="center_vertical"/>
 
-                    <LinearLayout
-                        android:id="@+id/date_selected_lay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/date_selected_txt"
+                        <LinearLayout
+                            android:id="@+id/date_selected_lay"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/g_p_side"
-                            android:layout_gravity="center_vertical"
-                            android:singleLine="true"
-                            android:text="@string/today"/>
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="@dimen/g_ic_s2"
-                            android:layout_height="@dimen/g_ic_s2"
-                            android:padding="@dimen/g_ic_p"
-                            android:src="@drawable/calendar_icon"/>
+                            <TextView
+                                android:id="@+id/date_selected_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/g_p_side"
+                                android:layout_gravity="center_vertical"
+                                android:singleLine="true"
+                                android:text="@string/today"/>
+
+                            <ImageView
+                                android:layout_width="@dimen/g_ic_s2"
+                                android:layout_height="@dimen/g_ic_s2"
+                                android:padding="@dimen/g_ic_p"
+                                android:src="@drawable/calendar_icon"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/child_divider"
+                        android:background="@color/colorLine"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id = "@+id/log_rv"
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content" />
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/child_divider"
-                    android:background="@color/colorLine"/>
+            </android.support.v4.widget.NestedScrollView>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id = "@+id/log_rv"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content" />
-            </LinearLayout>
-
-        </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <LinearLayout
             android:id="@+id/no_ac_content"

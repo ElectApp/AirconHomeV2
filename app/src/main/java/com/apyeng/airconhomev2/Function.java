@@ -49,6 +49,7 @@ import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
+import java.awt.font.TextAttribute;
 import java.io.ByteArrayOutputStream;
 import java.security.KeyStore;
 import java.text.DateFormat;
@@ -64,6 +65,8 @@ import static com.android.volley.Request.Method.GET;
 
 public class Function {
 
+    //Constant Value Format display flag
+    public static final byte SIGNED_FORM = 0, UNSIGNED_FORM = 1, BINARY_FORM = 2, HEX_FORM = 3;
 
     //Change background color of EditText and vibrate device for request enter data
     public static void setRequestEnter(Context context, @NonNull EditText editText){
@@ -599,6 +602,56 @@ public class Function {
             y += t.getY();
         }
         return y/entries.size();
+    }
+
+    public static String getStringValueFormat(int unsignedValue, byte format){
+        //Log.w(TAG, "Show value = "+s16Value+" in format "+format);
+        String out;
+        int s16Value = unsignedValue>32767? unsignedValue-65536 : unsignedValue;
+//        int unsignedValue;
+//        if (s16Value<0){
+//            unsignedValue = s16Value + 65536;
+//        }else {
+//            unsignedValue = s16Value;
+//        }
+        switch (format){
+            case UNSIGNED_FORM: //Unsigned form
+                out = String.valueOf(unsignedValue);
+                break;
+            case BINARY_FORM: //Binary form
+                String biActual, sub1, sub2, sub3, sub4;
+                //Fixed print out 16 bits
+                //If bit 16 = 1 => value must >= 32768
+                if (unsignedValue>=32768){
+                    biActual = Integer.toBinaryString(32768|unsignedValue);
+                }else {
+                    biActual = "0"+Integer.toBinaryString(32768|unsignedValue).substring(1);
+                }
+                sub1 = biActual.substring(0, 4);
+                sub2 = biActual.substring(4, 8);
+                sub3 = biActual.substring(8, 12);
+                sub4 = biActual.substring(12, 16);
+                out = sub1+" "+sub2+" "+sub3+" "+sub4; //0000 0000 0000 0000
+                break;
+            case HEX_FORM: //Hex form
+                String hexActual;
+                if (s16Value<0){
+                    hexActual = Integer.toHexString(32768|unsignedValue);
+                }else {
+                    hexActual = Integer.toHexString(unsignedValue);
+                    switch (hexActual.length()){
+                        case 3: hexActual = "0"+hexActual; break;
+                        case 2: hexActual = "00"+hexActual; break;
+                        case 1: hexActual = "000"+hexActual; break;
+                        case 0: hexActual = "0000"; break;
+                    }
+                }
+                out = "0x"+hexActual.toUpperCase();
+                break;
+            default: //Signed form
+                out = String.valueOf(s16Value);
+        }
+        return out;
     }
 
 
