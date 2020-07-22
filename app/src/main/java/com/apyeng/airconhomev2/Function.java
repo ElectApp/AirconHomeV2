@@ -32,6 +32,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -64,6 +65,8 @@ import static android.content.Context.WIFI_SERVICE;
 import static com.android.volley.Request.Method.GET;
 
 public class Function {
+
+    private static final String TAG = "Function";
 
     //Constant Value Format display flag
     public static final byte SIGNED_FORM = 0, UNSIGNED_FORM = 1, BINARY_FORM = 2, HEX_FORM = 3;
@@ -653,6 +656,41 @@ public class Function {
         }
         return out;
     }
+
+    //================== Start the Auto Calculate Width of Item for GridView ===================//
+
+    public static float convertPixelToDP(Context context, int px){
+        //Convert DP to Pixel
+        //Thank: https://developer.android.com/training/multiscreen/screendensities#java
+        float scale = context.getResources().getDisplayMetrics().density;
+        float dp = (px-0.5f)/scale;
+        Log.w(TAG, "Covert "+px+" px = "+dp+" DP by scale = "+scale);
+        return dp;
+    }
+
+    public static int[] getScreenDetail(Activity activity){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int h = displayMetrics.heightPixels;
+        int w = displayMetrics.widthPixels;
+        Log.w(TAG, "Screen W: "+w+", H: "+h);
+        return new int[]{ w, h };
+    }
+
+    //minDP = Min width of layout
+    public static int getGirdColumn(Context context, Activity activity, int minWidthDp){
+        int display[] = getScreenDetail(activity);
+        float n = convertPixelToDP(context, display[0])/minWidthDp;
+        Log.w(TAG, "N: "+n);
+        if (n<1.0f){ return 1; }
+        //EX. n = 1.8 after cast int => 1, So check n.x > 0.5 if true return n+1
+        float d = n - (int)n;
+        if (d>0.5f){ n += 1.0f; }
+        Log.w(TAG, "W: "+display[0]+", n: "+n);
+        return (int)n;
+    }
+
+    //================== End the Auto Calculate Width of Item for GridView ===================//
 
 
 }

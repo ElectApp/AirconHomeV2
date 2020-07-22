@@ -33,6 +33,8 @@ public class Constant {
     public static final String DEVICE_FIRMWARE = HOST + "device-firmware.php";
     public static final String SEND_RESET_PASSWORD_EMAIL = HOST + "send-email-reset-password.php";
     public static final String INSERT_UPDATE_ANY_GROUP_TABLE  = HOST + "insert-update-any-group-table.php";
+    public static final String SELECT_ANY_GROUP_TABLE  = HOST + "select-any-group-table.php";
+    public static final String ADD_EDIT_LABEL_URL = HOST + "add-edit-label.php";
 
     //Upload path
     private static final String IMAGE_TYPE = "images/";
@@ -51,7 +53,8 @@ public class Constant {
         STATUS = "status", USER_ID = "user_id", GROUP_ID = "group_id", VERIFY_CODE = "verification_code",
         NAME = "name", LOCATION = "location", DEVICE_ID = "device_id", PROFILE_IMG = "profile_img",
         ACTUAL_NAME = "actual_name", NICKNAME = "nickname", REGISTERED = "registered", FILENAME = "filename",
-            DETAILS = "details", MD5 = "md5", KEY_LIST = "key_list";
+            DETAILS = "details", MD5 = "md5", KEY_LIST = "key_list", LABEL_ID = "label_id", LABEL_NAME = "label_name",
+        TOTAL_DEVICES = "total_devices";
 
     //Other key on PHP scripts
     public static final String LANGUAGE = "language", GROUP_ID_LIST = "group_id_list",

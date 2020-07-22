@@ -9,6 +9,7 @@
 
     <dimen name="g_ic_s">48dp</dimen>
     <dimen name="g_ic_s2">36dp</dimen>
+    <dimen name="g_ic_s3">24dp</dimen>
     <dimen name="g_ic_p">8dp</dimen>
 
     <dimen name="g_margin_top">12dp</dimen>
@@ -56,6 +57,7 @@
     <dimen name="marker_width">32dp</dimen>
 
     <dimen name="item_offset">6dp</dimen>
+    <dimen name="item_offset2">2dp</dimen>
 
     <dimen name="circle_progress">72dp</dimen>
     <dimen name="chart_loading">36dp</dimen>

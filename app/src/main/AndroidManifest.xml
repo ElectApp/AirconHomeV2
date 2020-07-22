@@ -77,7 +77,9 @@
             android:windowSoftInputMode="adjustResize" /> <!-- Resize window when keyboard visible -->
 
         <activity android:name=".ModbusActivity" />
-        <activity android:name=".MoreLogDataActivity"></activity>
+        <activity android:name=".MoreLogDataActivity" />
+        <activity android:name=".ManageLabelActivity" />
+        <activity android:name=".EditLabelActivity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,9 +42,11 @@ import static android.app.Activity.RESULT_OK;
 
 public class MainFragment extends Fragment {
 
-    private LabelAdapter labelAdapter;
+    private int cLabelId;
+    private TextView labelTxt;
+    private ArrayList<SheetItem> labelItems;
     private AirItemAdapter airItemAdapter;
-    private int groupId;
+    private int groupId, userId;
     private MqttAndroidClient mqtt;
     private int countSubscribed;
     private View sectionView[];
@@ -52,8 +56,8 @@ public class MainFragment extends Fragment {
     private TextView faultTxt;
     private boolean disconnectFlag;
     private static final int PROGRESS = 0, CONTENT = 1, NO_AC = 2;
-    private static final int AIR_ITEM_WIDTH_MIN_DP = 228;   //Min width of air item layout (dp unit)
-    private static final int RENAME_CODE = 1725;
+    public static final int AIR_ITEM_WIDTH_MIN_DP = 228;   //Min width of air item layout (dp unit)
+    private static final int RENAME_CODE = 1725, CHANGE_LABEL_CODE = 1842;
     public static final String TAG = "MainFragment";
 
     @Override
@@ -63,6 +67,7 @@ public class MainFragment extends Fragment {
         //Get data
         Bundle bundle = getArguments();
         groupId = bundle.getInt(Constant.GROUP_ID, 0);
+        userId = bundle.getInt(Constant.GROUP_ID, 0);
 
         //Initial MQTT
         final String id = MqttClient.generateClientId();
@@ -112,40 +117,32 @@ public class MainFragment extends Fragment {
 
         numAC = view.findViewById(R.id.total_list);
         faultTxt = view.findViewById(R.id.no_internet_txt);
+        RecyclerView airRv = view.findViewById(R.id.ac_rv);
 
         sectionView = new View[3];
         sectionView[0] = view.findViewById(R.id.circle_progress);
-        sectionView[1] =  view.findViewById(R.id.container);
+        sectionView[1] = view.findViewById(R.id.container);;
         sectionView[2] = view.findViewById(R.id.no_ac_content);
 
         //Initial hide content
         showContent(PROGRESS);
 
-        //Spacer
-        ItemOffsetDecoration decoration = new ItemOffsetDecoration(context, R.dimen.item_offset);
-
-        //Initial label
-        RecyclerView labelRv = view.findViewById(R.id.label_rv);
-        LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        labelRv.setLayoutManager(manager);
-        labelAdapter = new LabelAdapter(context, new ArrayList<LabelItem>());
-        labelAdapter.setLabelClickListener(new LabelAdapter.OnLabelClickListener() {
+        //Label
+        labelTxt = view.findViewById(R.id.tv_label);
+        labelItems = new ArrayList<>();
+        view.findViewById(R.id.label_lay).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view, LabelItem labelItem, int i) {
-                Log.w(TAG, "Selected: "+i);
-
-
+            public void onClick(View v) {
+                showLabelList();
             }
         });
-        labelRv.setAdapter(labelAdapter);
-        //Set space
-        labelRv.addItemDecoration(decoration);
-        //Set RecyclerView smooth scrolling with NestScrollView
-        ViewCompat.setNestedScrollingEnabled(labelRv, false);
 
+        //Spacer
+        ItemOffsetDecoration decoration = new ItemOffsetDecoration(context, R.dimen.item_offset);
         //Initial air item
-        RecyclerView airRv = view.findViewById(R.id.ac_rv);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, getGirdColumn(), GridLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,
+                Function.getGirdColumn(context, activity, AIR_ITEM_WIDTH_MIN_DP),
+                GridLayoutManager.VERTICAL, false);
         airRv.setLayoutManager(gridLayoutManager);
         airItemAdapter = new AirItemAdapter(context, new ArrayList<AirItem>());
         airItemAdapter.setAirItemClickListener(new AirItemAdapter.OnAirItemClickListener() {
@@ -182,28 +179,16 @@ public class MainFragment extends Fragment {
         //Set RecyclerView smooth scrolling with NestScrollView
         ViewCompat.setNestedScrollingEnabled(airRv, false);
 
-        //Add labels
-        ImageTextButtonWidget addLabelBtn = view.findViewById(R.id.add_label_btn);
-        addLabelBtn.setOnWidgetClickListener(new ImageTextButtonWidget.OnWidgetClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         return view;
-
     }
-
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.w(TAG, "View is created...");
 
-        //Read device
-        tryReadDeviceDetail();
+        //Read Label
+        tryReadLabelDetail();
 
     }
 
@@ -220,6 +205,7 @@ public class MainFragment extends Fragment {
         //disconnectMQTTServer();
         super.onStop();
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -241,6 +227,12 @@ public class MainFragment extends Fragment {
                     }
                 }
                 break;
+            case CHANGE_LABEL_CODE:
+                if (resultCode==RESULT_OK){
+                    //Reload
+                    tryReadLabelDetail();
+                }
+                break;
         }
 
     }
@@ -250,15 +242,12 @@ public class MainFragment extends Fragment {
         super.onAttach(context);
         //This function work before onCreate()
         //Thank: https://stackoverflow.com/questions/8215308/using-context-in-a-fragment
-        Log.w(TAG, "Save context...");
-        //Save context
         this.context = context;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        Log.w(TAG, "Save activity...");
         this.activity = activity;
     }
 
@@ -275,7 +264,7 @@ public class MainFragment extends Fragment {
 
     private void setNumAC(){
         int total = airItemAdapter.getSize();
-        String txt1 = context.getString(R.string.air_conditioner)+" ("+total+"), ";
+        String txt1 = "A/C ("+total+"), ";
         int n = airItemAdapter.getOnline();
         String txt2 = n>0? n+" "+context.getString(R.string.online)
                 : context.getString(R.string.offline);
@@ -364,10 +353,49 @@ public class MainFragment extends Fragment {
         setNumAC();
     }
 
+    private void tryReadLabelDetail(){
+        if (Function.internetConnected(context)){
+            HomeManager homeManager = new HomeManager(context);
+            homeManager.readLabelDetail(groupId, new HomeManager.OnReadLabelCallback() {
+                @Override
+                public void onSuccess(List<LabelItem> items) {
+                    Log.w(TAG, "OnSuccess...");
+                    //Hide dialog
+                    Function.dismissAppErrorDialog(activity);
+                    //Update label
+                    labelItems.clear();
+                    labelItems.add(new SheetItem(R.drawable.home_icon, "All", 0));
+                    for (LabelItem label : items){
+                        labelItems.add(new SheetItem(R.drawable.ic_tag, label.getText(), label.getId()));
+                    }
+                    labelItems.add(new SheetItem(R.drawable.ic_settings2, "Manage Label", -1));
+                    //Label and load device list
+                    setCurrentLabel(labelItems.get(0));
+                }
+
+                @Override
+                public void onFailed(String error) {
+                    Log.w(TAG, "OnFailed..."+error);
+                    Function.showDBErrorDialog(activity, error, errorListener);
+                }
+            });
+        }else {
+            Function.showNoInternetDialog(activity, errorListener);
+        }
+    }
+
+    private void setCurrentLabel(SheetItem sheetItem){
+        //Label
+        cLabelId = sheetItem.getItemId();
+        labelTxt.setText(sheetItem.getName());
+        //Load devie list
+        tryReadDeviceDetail();
+    }
+
     private void tryReadDeviceDetail(){
         if (Function.internetConnected(context)){
             HomeManager homeManager = new HomeManager(context);
-            homeManager.readFullDeviceDetail(groupId, new HomeManager.OnReadFullDeviceDetailListener() {
+            homeManager.readFullDeviceDetail(groupId, cLabelId, new HomeManager.OnReadFullDeviceDetailListener() {
                 @Override
                 public void onSuccess(List<AirItem> airItems) {
                     Log.w(TAG, "OnSuccess...");
@@ -407,15 +435,7 @@ public class MainFragment extends Fragment {
             = new AppErrorDialog.OnClickActionButtonListener() {
         @Override
         public void onClick(View view, int titleId, int buttonId) {
-            /*
-            switch (titleId){
-                case R.string.no_result:
-                case R.string.no_internet:
-                    tryReadDeviceDetail();
-                    break;
-            }
-            */
-            tryReadDeviceDetail();
+            tryReadLabelDetail();
         }
     };
 
@@ -588,31 +608,6 @@ public class MainFragment extends Fragment {
         return (int)n;
     }
 
-    private void testAddLabel(){
-        //Test
-        List<LabelItem> list = new ArrayList<>();
-        //list.add(new LabelItem(1, null, r, c1, c2, false));
-        for (int i=0; i<3; i++){
-            String r = "Room"+String.valueOf(i+1);
-            list.add(new LabelItem(1, r, false));
-        }
-        labelAdapter.addLabels(list);
-    }
-
-    private void testAddAC(){
-        List<AirItem> list = new ArrayList<>();
-        int on = 19647; int off = 19646; boolean state = false;
-        for (int i=0; i<3; i++){
-            Indoor indoor = new Indoor(state? on:off, 250, 0, 120+(i*30));
-            AirItem item = new AirItem( 20, "AC-123",
-                    "Room"+String.valueOf(i+1), indoor);
-            list.add(item);
-            state = !state;
-        }
-        airItemAdapter.addAirItems(list);
-    }
-
-
     private void showContent(int n){
         for (int i=0; i<sectionView.length; i++){
             sectionView[i].setVisibility(i==n? View.VISIBLE : View.GONE);
@@ -696,6 +691,39 @@ public class MainFragment extends Fragment {
 
     }
 
-
+    private void showLabelList(){
+        //Layout
+        View view = activity.getLayoutInflater().inflate(R.layout.bottom_sheet_layout, null);
+        final BottomSheetDialog dialog = new BottomSheetDialog(context);
+        dialog.setContentView(view);
+        RecyclerView rv = view.findViewById(R.id.menu_rv);
+        //Add to list
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(context));
+        SheetItemAdapter adapter = new SheetItemAdapter(groupId, labelItems, new SheetItemAdapter.ItemListener() {
+            @Override
+            public void onItemClick(int id, int numberSelected, SheetItem itemSelected) {
+                //Hide
+                dialog.dismiss();
+                Log.w(TAG, "Load label..."+id+", "+numberSelected+", "+itemSelected.getItemId());
+                //Type
+                if (itemSelected.getItemId()<0){
+                    //Setting
+                    Log.w(TAG, "Manage label");
+                    Intent intent = new Intent(context, ManageLabelActivity.class);
+                    intent.putExtra(Constant.GROUP_ID, groupId);
+                    intent.putExtra(Constant.USER_ID, userId);
+                    startActivityForResult(intent, CHANGE_LABEL_CODE);
+                }else {
+                    //Reload
+                    setCurrentLabel(itemSelected);
+                }
+            }
+        });
+        rv.setAdapter(adapter);
+        //Behavior and show
+        BottomSheetBehavior.from((View)view.getParent());
+        dialog.show();
+    }
 
 }

@@ -212,15 +212,15 @@ public class HomeManager {
         void onFailed(String error);
     }
 
-
-    public void readFullDeviceDetail(final int groupId, final OnReadFullDeviceDetailListener listener){
-        Log.w(TAG, "Read device full detail in group: "+groupId);
+    public void readFullDeviceDetail(final int groupId, final int labelId, final OnReadFullDeviceDetailListener listener){
+        Log.w(TAG, "Read device full detail in group: "+groupId+", label: "+labelId);
         //Loading
         Function.showLoadingDialog(activity);
         //Try read
         Ion.with(context)
                 .load(Constant.DEVICE_LIST)
                 .setBodyParameter(Constant.GROUP_ID, String.valueOf(groupId))
+                .setBodyParameter(Constant.LABEL_ID, String.valueOf(labelId))
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
@@ -249,6 +249,10 @@ public class HomeManager {
                         }
                     }
                 });
+    }
+
+    public void readFullDeviceDetail(final int groupId, final OnReadFullDeviceDetailListener listener){
+        readFullDeviceDetail(groupId, 0, listener);
     }
 
     interface OnReadFullDeviceDetailListener{
@@ -838,6 +842,90 @@ public class HomeManager {
         void onFailed(String error);
     }
 
+    public void readLabelDetail(int groupId, final OnReadLabelCallback listener){
+        String sqlMessage = "SELECT * FROM label_data";
+        //Try read
+        Ion.with(context)
+                .load(Constant.SELECT_ANY_GROUP_TABLE)
+                .setBodyParameter(Constant.GROUP_ID, String.valueOf(groupId))
+                .setBodyParameter(Constant.SQL_MESSAGE, sqlMessage)
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        //Close loading
+                        Function.dismissLoadingDialog(activity);
+                        //Check result
+                        Log.e(TAG, "Error: "+e);
+                        Log.w(TAG, "Result: "+result);
+                        if (result!=null && result.isJsonArray()){
+                            List<LabelItem> labelItems = new ArrayList<>();
+                            for (int i=0; i<result.size(); i++){
+                                JsonObject object = result.get(i).getAsJsonObject();
+                                if (!object.has(Constant.ERROR)){
+                                    int labelId = object.get(Constant.LABEL_ID).getAsInt();
+                                    String name = object.get(Constant.LABEL_NAME).getAsString();
+                                    int total = object.get(Constant.TOTAL_DEVICES).getAsInt();
+                                    labelItems.add(new LabelItem(labelId, name, total,false));
+                                }
+                            }
+                            listener.onSuccess(labelItems);
+                        }else if (e!=null){
+                            listener.onFailed(e.getMessage());
+                        }else {
+                            listener.onFailed(context.getString(R.string.no_result));
+                        }
+                    }
+                });
+    }
+
+    public interface OnReadLabelCallback{
+        void onSuccess(List<LabelItem> items);
+        void onFailed(String error);
+    }
+
+    public void addOrEditDeviceInLabel(int groupId, int userId, LabelItem labelItem,
+                                       @NonNull int[] deviceId, final OnListener listener){
+        StringBuilder builder = new StringBuilder();
+        for (int z=0; z<deviceId.length; z++){
+            if (z>0){
+                builder.append(",");
+            }
+            builder.append(deviceId[z]);
+        }
+        String d = builder.toString();
+        Log.w(TAG, "Save groupId="+groupId+", labelId="+labelItem.getId()+", device_id="+d);
+        //Try read
+        Ion.with(context)
+                .load(Constant.ADD_EDIT_LABEL_URL)
+                .setBodyParameter(Constant.GROUP_ID, String.valueOf(groupId))
+                .setBodyParameter(Constant.USER_ID, String.valueOf(userId))
+                .setBodyParameter(Constant.LABEL_ID, String.valueOf(labelItem.getId()))
+                .setBodyParameter(Constant.LABEL_NAME, labelItem.getText())
+                .setBodyParameter(Constant.DEVICE_ID, d)
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        //Check result
+                        Log.e(TAG, "Error: "+e);
+                        Log.w(TAG, "Result: "+result);
+                        if (result!=null){
+                            //success<last-id>
+                            if (result.startsWith(Constant.SUCCESS)){
+                                //Callback lastId
+                                listener.onSuccess();
+                            }else {
+                                listener.onFailed(result);
+                            }
+                        }else if(e!=null && !e.getMessage().isEmpty()){
+                            listener.onFailed(e.getMessage());
+                        }else {
+                            listener.onFailed(context.getString(R.string.no_result));
+                        }
+                    }
+                });
+    }
 
 
 }

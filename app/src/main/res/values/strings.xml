@@ -119,7 +119,19 @@
         <item>Rename</item>
         <item>Delete</item>
     </string-array>
+    <string name="all">All</string>
 
+    <!-- ManageLabelActivity -->
+    <string name="manage_labels">Manage Labels</string>
+    <string name="no_label">No label found</string>
+    <string name="add_label">Add Label</string>
+
+    <!-- EditLabelActivity -->
+    <string name="edit_label">Edit Label</string>
+    <string name="enter_label_name">Enter label name</string>
+    <string name="selected">Selected</string>
+    <string name="select_all">Select All</string>
+    <string name="unselect_all">Unselect All</string>
 
     <!-- People Fragment -->
     <string name="no_member">No Member found</string>

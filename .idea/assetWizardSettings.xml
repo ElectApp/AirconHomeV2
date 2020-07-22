@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_navigate_next_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,8 +34,9 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_pcb" />
-                            <entry key="sourceFile" value="D:\Aircon App\Material\Icon\pcb.svg" />
+                            <entry key="color" value="0004ff" />
+                            <entry key="outputName" value="ic_scg_home" />
+                            <entry key="sourceFile" value="D:\Aircon App\Material\Product\ic_scg_home.svg" />
                           </map>
                         </option>
                       </PersistentState>
